@@ -1,0 +1,8 @@
+/etc/logrotate.d/invidious.logrotate {
+	rotate 4
+	weekly
+	notifempty
+	missingok
+	compress
+	minsize 1048576
+}

@@ -1,0 +1,58 @@
+{
+    "name": "Invidious",
+    "id": "invidious",
+    "packaging_format": 1,
+    "description": {
+        "en": "Alternative front-end to YouTube",
+        "fr": "Front-end alternatif à YouTube"
+    },
+    "version": "0.20.1~ynh1",
+    "url": "https://invidio.us/",
+    "license": "GPL-3.0-only",
+    "maintainer": {
+        "name": "eric_G"
+    },
+    "requirements": {
+        "yunohost": ">= 4.0.0"
+    },
+    "multi_instance": false,
+    "services": [
+        "nginx"
+    ],
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a domain name for Invidious",
+                    "fr": "Choisissez un nom de domaine pour Invidious"
+                },
+                "example": "domain.org"
+            },
+            {
+                "name": "path",
+                "type": "path",
+                "ask": {
+                    "en": "Choose a path for Invidious",
+                    "fr": "Choisissez un chemin pour Invidious"
+                },
+                "example": "/",
+                "default": "/"
+            },
+            {
+                "name": "is_public",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is it a public site?",
+                    "fr": "Est-ce un site public ?"
+                },
+                "help": {
+                    "en": "You must activate public site if you want to connect a client player to Navidrome. This can be changed later via the webadmin.",
+                    "fr": "Vous devez activer site public si vous souhaitez connecter un lecteur client à Navidrome. Vous pourrez changer ceci plus tard via la webadmin."
+                },
+                "default": true
+            }
+        ]
+    }
+}

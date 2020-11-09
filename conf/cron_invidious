@@ -1,0 +1,2 @@
+@weekly psql __APP__ -c "DELETE FROM nonces * WHERE expire < current_timestamp" > /dev/null
+@weekly psql __APP__ -c "TRUNCATE TABLE videos" > /dev/null
