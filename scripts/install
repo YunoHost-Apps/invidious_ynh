@@ -85,6 +85,32 @@ ynh_app_setting_set --app=$app --key=db_pwd  --value=$db_pwd
 ynh_psql_test_if_first_run
 ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
 
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/channels.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/videos.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/channel_videos.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/users.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/session_ids.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/nonces.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/annotations.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/playlists.sql
+ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/playlist_videos.sql
+exit
+
+# systemctl enable --now postgresql
+# sudo -i -u postgres
+# psql -c "CREATE USER $db_user WITH PASSWORD '$db_pwd';"
+# createdb -O $db_user $db_name
+# psql $db_name $db_user < $final_path/config/sql/channels.sql
+# psql $db_name $db_user < $final_path/config/sql/videos.sql
+# psql $db_name $db_user < $final_path/config/sql/channel_videos.sql
+# psql $db_name $db_user < $final_path/config/sql/users.sql
+# psql $db_name $db_user < $final_path/config/sql/session_ids.sql
+# psql $db_name $db_user < $final_path/config/sql/nonces.sql
+# psql $db_name $db_user < $final_path/config/sql/annotations.sql
+# psql $db_name $db_user < $final_path/config/sql/playlists.sql
+# psql $db_name $db_user < $final_path/config/sql/playlist_videos.sql
+# exit
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
