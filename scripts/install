@@ -135,13 +135,18 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
 # Create a temporary directory
-tmpdir="$(mktemp -d)"
-cp -a "$final_path/config/sql/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}" "tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}"
+# tmpdir="$(mktemp -d)"
+# cp -a "$final_path/config/sql/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}" "tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}"
 
-ynh_psql_execute_file_as_root --file="tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql.sql,annotations.sql,playlists.sql,playlist_videos.sql}" --database=$db_name
+# ynh_psql_execute_file_as_root --file="tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql.sql,annotations.sql,playlists.sql,playlist_videos.sql}" --database=$db_name
 
-# Remove the tmp directory securely
-ynh_secure_remove --file="$tmpdir"
+# # Remove the tmp directory securely
+# ynh_secure_remove --file="$tmpdir"
+
+
+
+for i in $final_path/config/sql/*.sql ; do ynh_psql_execute_file_as_root --file="$i" --database=$db_name ; done
+
 
 #=================================================
 # NGINX CONFIGURATION
