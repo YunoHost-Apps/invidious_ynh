@@ -80,7 +80,7 @@ ynh_exec_as $app (
 	git pull
 	for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
 	shards update && shards install
-	crystal build src/invidious.cr --release
+	crystal build src/invidious.cr #--release
 	exit
 popd || ynh_die
 fi
