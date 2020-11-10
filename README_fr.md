@@ -42,7 +42,8 @@ Invidious est une interface alternative à YouTube.
 
 ## Limitations
 
-> :warning: Invidious nécessite un domaine racine dédié, par exemple. invidious.domain.tld
+Invidious nécessite un domaine racine dédié, par exemple. invidious.domain.tld  
+> :warning: Pour installer Invidious, vous avez besoin d'au moins 2 Go de RAM disponible.
 
 ## Liens
 

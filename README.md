@@ -42,7 +42,8 @@ Invidious is an alternative front-end to YouTube.
 
 ## Limitations
 
-> :warning: Invidious require a dedicated root domain, ie. invidious.domain.tld
+Invidious require a dedicated root domain, ie. invidious.domain.tld  
+> :warning: To install Invidious you need at least 2GB of RAM available.
 
 ## Links
 
