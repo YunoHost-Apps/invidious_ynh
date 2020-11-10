@@ -9,7 +9,7 @@
 If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
 
 ## Overview
-Invidious is an alternative front-end to YouTube.
+Invidious is an alternative front-end for accessing YouTube videos without going through youtube.com.
 
 **Shipped version:** 0.20.1
 
