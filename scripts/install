@@ -136,9 +136,9 @@ git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
 # Create a temporary directory
 tmpdir="$(mktemp -d)"
-cp -a "$final_path/config/sql/{channels,videos,channel_videos,users,session_ids,nonces,annotations,playlists,playlist_videos}.sql" "tmpdir/{channels,videos,channel_videos,users,session_ids,nonces,annotations,playlists,playlist_videos}.sql"
+cp -a "$final_path/config/sql/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}" "tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}"
 
-ynh_psql_execute_file_as_root --file=tmpdir/{channels,videos,channel_videos,users,session_ids,nonces,annotations,playlists,playlist_videos}.sql --database=$db_name
+ynh_psql_execute_file_as_root --file="tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql.sql,annotations.sql,playlists.sql,playlist_videos.sql}" --database=$db_name
 
 # Remove the tmp directory securely
 ynh_secure_remove --file="$tmpdir"
