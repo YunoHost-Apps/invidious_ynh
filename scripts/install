@@ -85,37 +85,6 @@ ynh_app_setting_set --app=$app --key=db_pwd  --value=$db_pwd
 ynh_psql_test_if_first_run
 ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
 
-# psql $db_name $db_user < $final_path/config/sql/channels.sql
-# psql $db_name $db_user < $final_path/config/sql/videos.sql
-# psql $db_name $db_user < $final_path/config/sql/channel_videos.sql
-# psql $db_name $db_user < $final_path/config/sql/users.sql
-# psql $db_name $db_user < $final_path/config/sql/session_ids.sql
-# psql $db_name $db_user < $final_path/config/sql/nonces.sql
-# psql $db_name $db_user < $final_path/config/sql/annotations.sql
-# psql $db_name $db_user < $final_path/config/sql/playlists.sql
-# psql $db_name $db_user < $final_path/config/sql/playlist_videos.sql
-
-# cat $final_path/config/sql/{channels,videos,channel_videos,users,session_ids,nonces,annotations,playlists,playlist_videos}.sql > some_tmp_file.sql,
-# then
-# ynh_psql_execute_file_as_root --file=some_tmp_file.sql --database=$db_name
-
-# exit
-
-# systemctl enable --now postgresql
-# sudo -i -u postgres
-# psql -c "CREATE USER $db_user WITH PASSWORD '$db_pwd';"
-# createdb -O $db_user $db_name
-# psql $db_name $db_user < $final_path/config/sql/channels.sql
-# psql $db_name $db_user < $final_path/config/sql/videos.sql
-# psql $db_name $db_user < $final_path/config/sql/channel_videos.sql
-# psql $db_name $db_user < $final_path/config/sql/users.sql
-# psql $db_name $db_user < $final_path/config/sql/session_ids.sql
-# psql $db_name $db_user < $final_path/config/sql/nonces.sql
-# psql $db_name $db_user < $final_path/config/sql/annotations.sql
-# psql $db_name $db_user < $final_path/config/sql/playlists.sql
-# psql $db_name $db_user < $final_path/config/sql/playlist_videos.sql
-# exit
-
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
@@ -134,19 +103,10 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
 git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
-# Create a temporary directory
-# tmpdir="$(mktemp -d)"
-# cp -a "$final_path/config/sql/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}" "tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql,annotations.sql,playlists.sql,playlist_videos.sql}"
-
-# ynh_psql_execute_file_as_root --file="tmpdir/{channels.sql,videos.sql,channel_videos.sql,users.sql,session_ids.sql,nonces.sql.sql,annotations.sql,playlists.sql,playlist_videos.sql}" --database=$db_name
-
-# # Remove the tmp directory securely
-# ynh_secure_remove --file="$tmpdir"
-
-
-
-for i in $final_path/config/sql/*.sql ; do ynh_psql_execute_file_as_root --file="$i" --database=$db_name ; done
-
+for i in $final_path/config/sql/*.sql ; do
+	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
+	ynh_psql_execute_file_as_root --file="$i" --database=$db_name ;
+done
 
 #=================================================
 # NGINX CONFIGURATION
