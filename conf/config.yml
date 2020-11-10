@@ -10,7 +10,7 @@ db:
 
 full_refresh: false
 https_only: true
-domain: http://__DOMAIN__
+domain: 
 port: __PORT__
 host_binding: 127.0.0.1
 
