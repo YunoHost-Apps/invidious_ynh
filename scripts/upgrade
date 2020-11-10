@@ -74,16 +74,13 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-
-pushd "$final_path" || ynh_die
-ynh_exec_as $app 
-	currentVersion=$(git rev-list --max-count=1 --abbrev-commit HEAD)
-	git pull
-	for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
-	shards update && shards install
-	crystal build src/invidious.cr #--release
-	exit
-popd || ynh_die
+	# Remove the app directory securely
+	ynh_secure_remove --file=$final_path
+	
+	pushd "$final_path" || ynh_die
+		shards update && shards install
+		crystal build $final_path/src/invidious.cr --release
+	popd || ynh_die
 fi
 
 #=================================================
