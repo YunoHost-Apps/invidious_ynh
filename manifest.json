@@ -52,7 +52,17 @@
                     "fr": "Vous devez activer site public si vous souhaitez connecter un lecteur client à Navidrome. Vous pourrez changer ceci plus tard via la webadmin."
                 },
                 "default": true
-            }
+            },
+            {
+                "name": "language",
+                "type": "string",
+                "ask": {
+                    "en": "Choose the application language",
+                    "fr": "Choisissez la langue de l'application"
+                },
+                "choices": ["fr_FR", "en_GB", "de_DE"],
+                "default": "en_GB"
+            },
         ]
     }
 }

@@ -1,14 +1,23 @@
 channel_threads: 1
 feed_threads: 1
+
 db:
   user: __DB_NAME__
   password: __DB_PASS__
   host: localhost
   port: 5432
   dbname: __DB_NAME__
+
 full_refresh: false
-https_only: false
+https_only: true
 domain: http://__DOMAIN__
 port: __PORT__
 host_binding: 127.0.0.1
+
+#https://github.com/iv-org/invidious/blob/5c6911065845d2724c7826f3d663a6ee6c7d4774/src/invidious/helpers/helpers.cr#L129
+default_user_preferences:
+  dark_mode: true
+  local: true
+  locale: "__LANGUAGE__"
+  comments: ["youtube",""]
 
