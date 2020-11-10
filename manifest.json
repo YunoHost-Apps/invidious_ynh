@@ -62,7 +62,7 @@
                 },
                 "choices": ["fr_FR", "en_GB", "de_DE"],
                 "default": "en_GB"
-            },
+            }
         ]
     }
 }
