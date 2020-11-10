@@ -23,6 +23,8 @@ Invidious is an alternative front-end to YouTube.
 
 ## Configuration
 
+You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yaml` with the help of this [documentation](https://github.com/iv-org/invidious/wiki/Configuration).
+
 ## Documentation
 
  * Official documentation: https://github.com/iv-org/invidious/wiki

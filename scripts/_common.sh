@@ -18,3 +18,16 @@ pkg_dependencies="apt-transport-https libssl-dev libxml2-dev libyaml-dev libgmp-
 #=================================================
 # FUTURE OFFICIAL HELPERS
 #=================================================
+
+# Execute a command as another user
+# usage: ynh_exec_as USER COMMAND [ARG ...]
+ynh_exec_as() {
+  local USER=$1
+  shift 1
+
+  if [[ $USER = $(whoami) ]]; then
+    eval "$@"
+  else
+    sudo -u "$USER" "$@"
+  fi
+}

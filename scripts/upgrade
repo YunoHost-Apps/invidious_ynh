@@ -73,7 +73,8 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-pushd "$final_path" || ynh_die
+ynh_exec_as $app (
+	pushd "$final_path" || ynh_die
 	currentVersion=$(git rev-list --max-count=1 --abbrev-commit HEAD)
 	git pull
 	for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
@@ -82,6 +83,7 @@ pushd "$final_path" || ynh_die
 	exit
 popd || ynh_die
 fi
+)
 
 #=================================================
 # NGINX CONFIGURATION
