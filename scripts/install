@@ -85,16 +85,21 @@ ynh_app_setting_set --app=$app --key=db_pwd  --value=$db_pwd
 ynh_psql_test_if_first_run
 ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
 
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/channels.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/videos.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/channel_videos.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/users.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/session_ids.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/nonces.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/annotations.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/playlists.sql
-ynh_psql_execute_as_root --sql=psql $db_name $db_user < $final_path/config/sql/playlist_videos.sql
-exit
+# psql $db_name $db_user < $final_path/config/sql/channels.sql
+# psql $db_name $db_user < $final_path/config/sql/videos.sql
+# psql $db_name $db_user < $final_path/config/sql/channel_videos.sql
+# psql $db_name $db_user < $final_path/config/sql/users.sql
+# psql $db_name $db_user < $final_path/config/sql/session_ids.sql
+# psql $db_name $db_user < $final_path/config/sql/nonces.sql
+# psql $db_name $db_user < $final_path/config/sql/annotations.sql
+# psql $db_name $db_user < $final_path/config/sql/playlists.sql
+# psql $db_name $db_user < $final_path/config/sql/playlist_videos.sql
+
+# cat $final_path/config/sql/{channels,videos,channel_videos,users,session_ids,nonces,annotations,playlists,playlist_videos}.sql > some_tmp_file.sql,
+# then
+# ynh_psql_execute_file_as_root --file=some_tmp_file.sql --database=$db_name
+
+# exit
 
 # systemctl enable --now postgresql
 # sudo -i -u postgres
@@ -128,6 +133,15 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
 # Download, check integrity, uncompress and patch the source from app.src
 git clone https://github.com/iv-org/invidious "$final_path" --quiet
+
+# Create a temporary directory
+tmpdir="$(mktemp -d)"
+cat $final_path/config/sql/{channels,videos,channel_videos,users,session_ids,nonces,annotations,playlists,playlist_videos}.sql > tmpdir.sql,
+
+ynh_psql_execute_file_as_root --file=tmpdir.sql --database=$db_name
+
+# Remove the tmp directory securely
+ynh_secure_remove --file="$tmpdir"
 
 #=================================================
 # NGINX CONFIGURATION
