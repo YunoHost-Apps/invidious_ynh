@@ -44,7 +44,8 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 
 ## Limitations
 
-> :warning: Invidious require a dedicated root domain, ie. invidious.domain.tld
+Invidious require a dedicated root domain, ie. invidious.domain.tld  
+> :warning: To install Invidious you need at least 2GB of RAM available.
 
 ## Links
 
