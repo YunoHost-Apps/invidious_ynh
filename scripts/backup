@@ -42,12 +42,6 @@ ynh_print_info --message="Declaring files to be backed up..."
 ynh_backup --src_path="$final_path"
 
 #=================================================
-# BACKUP THE APP CONFIG DIR
-#=================================================
-
-ynh_backup --src_path="/var/lib/$app"
-
-#=================================================
 # BACKUP THE NGINX CONFIGURATION
 #=================================================
 
