@@ -3,7 +3,7 @@
 		domain="domain.tld"	(DOMAIN)
 		path="/"            (PATH)
 		is_public=1	        (PUBLIC|public=1|private=0)
-		language="fr_FR"
+		language="fr"
 	; Checks
 		pkg_linter=1
 		setup_sub_dir=1
