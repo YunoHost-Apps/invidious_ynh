@@ -150,7 +150,7 @@ chmod 0644 /etc/logrotate.d/$app
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=3
 
-yunohost service add $app --description "Invidious is an alternative front-end to YouTube"
+yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
