@@ -23,11 +23,11 @@ Invidious est une interface permettant d'accéder aux vidéos YouTube sans passe
 
 ## Configuration
 
-Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/www/invidious/config/config.yaml` avec l'aide de cette [documentation](https://github.com/iv-org/invidious/wiki/Configuration).
+Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/www/invidious/config/config.yaml` avec l'aide de cette [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
 
 ## Documentation
 
- * Documentation officielle : https://github.com/iv-org/invidious/wiki
+ * Documentation officielle : https://github.com/iv-org/documentation
  * Documentation YunoHost : https://yunohost.org/#/app_invidious_fr
 
 ## Caractéristiques spécifiques YunoHost
@@ -50,7 +50,6 @@ Invidious nécessite un domaine racine dédié, par exemple. invidious.domain.tl
 ## Liens
 
  * Signaler un bug : https://github.com/YunoHost-Apps/invidious_ynh/issues
- * Site de l'application : https://invidio.us/
  * Dépôt de l'application principale : https://github.com/iv-org/invidious
  * Site web YunoHost : https://yunohost.org/
 
