@@ -1,7 +1,7 @@
 # Invidious for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
-[![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=invidious)
+[![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
 *[Lire ce readme en français.](./README_fr.md)*
 
@@ -23,11 +23,11 @@ Invidious is an alternative front-end for accessing YouTube videos without going
 
 ## Configuration
 
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yaml` with the help of this [documentation](https://github.com/iv-org/invidious/wiki/Configuration).
+You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yaml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
 
 ## Documentation
 
- * Official documentation: https://github.com/iv-org/invidious/wiki
+ * Official documentation: https://github.com/iv-org/documentation
  * YunoHost documentation: https://yunohost.org/#/app_invidious
 
 ## YunoHost specific features
@@ -50,7 +50,6 @@ Invidious require a dedicated root domain, ie. invidious.domain.tld
 ## Links
 
  * Report a bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
- * App website: https://invidio.us/
  * Upstream app repository: https://github.com/iv-org/invidious
  * YunoHost website: https://yunohost.org/
 
