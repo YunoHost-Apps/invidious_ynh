@@ -23,11 +23,11 @@ Invidious is an alternative front-end for accessing YouTube videos without going
 
 ## Configuration
 
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yaml` with the help of this [documentation](https://github.com/iv-org/invidious/wiki/Configuration).
+You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yaml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
 
 ## Documentation
 
- * Official documentation: https://github.com/iv-org/invidious/wiki
+ * Official documentation: https://github.com/iv-org/documentation
  * YunoHost documentation: https://yunohost.org/#/app_invidious
 
 ## YunoHost specific features
@@ -50,7 +50,6 @@ Invidious require a dedicated root domain, ie. invidious.domain.tld
 ## Links
 
  * Report a bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
- * App website: https://invidio.us/
  * Upstream app repository: https://github.com/iv-org/invidious
  * YunoHost website: https://yunohost.org/
 
