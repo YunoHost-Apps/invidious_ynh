@@ -56,7 +56,7 @@ ynh_app_setting_set --app=$app --key=language  --value=$language
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_script_progression --message="Configuring firewall..." --weight=0
+ynh_script_progression --message="Finding an available port..." --weight=0
 
 # Find an available port
 port=$(ynh_find_port --port=3000)
@@ -67,7 +67,7 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=9
 
-ynh_install_app_dependencies $pkg_dependencies
+ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 # Install Crystal
 ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt crystal main" --package="crystal" --key="https://keybase.io/crystal/pgp_keys.asc"
