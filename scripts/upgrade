@@ -81,7 +81,7 @@ pushd $final_path
 	for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
 	shards update && shards install
 	crystal build src/invidious.cr --release
-	popd || ynh_die
+	popd
 fi
 
 # 	# Remove the app directory securely
