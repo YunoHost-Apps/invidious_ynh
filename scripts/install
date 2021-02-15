@@ -78,14 +78,9 @@ ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt
 ynh_script_progression --message="Creating a PostgreSQL database..." --weight=2
 
 db_name=$(ynh_sanitize_dbid --db_name=$app)
-db_user=$db_name
-db_pwd=$(ynh_string_random --length=30)
-
 ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-ynh_app_setting_set --app=$app --key=db_pwd  --value=$db_pwd
-
 ynh_psql_test_if_first_run
-ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
+ynh_psql_setup_db --db_user=$db_name --db_name=$db_name
 
 #=================================================
 # CREATE DEDICATED USER
@@ -125,9 +120,9 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=10
 
-pushd "$final_path" || ynh_die
+pushd $final_path || ynh_die
 	shards update && shards install
-	crystal build $final_path/src/invidious.cr --release
+	crystal build src/invidious.cr --release
 popd || ynh_die
 
 #=================================================
@@ -135,24 +130,13 @@ popd || ynh_die
 #=================================================
 ynh_script_progression --message="Modifying a config file..."
 
-cp ../conf/config.yml "$final_path/config/config.yml"
-
-# Main config File
-ynh_replace_string --match_string="__DB_NAME__" --replace_string="$db_name" --target_file="$final_path/config/config.yml"
-ynh_replace_string --match_string="__DB_PASS__" --replace_string="$db_pwd" --target_file="$final_path/config/config.yml"
-#ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --target_file="$final_path/config/config.yml"
-ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$final_path/config/config.yml"
-ynh_replace_string --match_string="__LANGUAGE__" --replace_string="$language" --target_file="$final_path/config/config.yml"
-
+ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
 ynh_store_file_checksum --file="$final_path/config/config.yml"
 
 #=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
-
-ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__FINAL_PATH__" --replace_string="$final_path" --target_file="../conf/systemd.service"
 
 ynh_add_systemd_config
 
@@ -161,8 +145,7 @@ ynh_add_systemd_config
 #=================================================
 ynh_script_progression --message="Setuping a cron..." --weight=1
 
-cp ../conf/cron_invidious /etc/cron.d/$app
-ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="/etc/cron.d/$app"
+ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
 
 #=================================================
 # SETUP LOGROTATE
@@ -180,7 +163,7 @@ ynh_use_logrotate
 ynh_script_progression --message="Securing files and directories..." --weight=1
 
 # Set permissions to app files
-chown -R $app: "$final_path"
+chown -R $app: $final_path
 chmod 0644 /etc/logrotate.d/$app
 
 #=================================================
@@ -196,17 +179,17 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
+ynh_systemd_action --service_name=$app --action=start --log_path="systemd"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring SSOwat..." --weight=1
+ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary or protect it
 if [ $is_public -eq 1 ]
 then
-	ynh_permission_update --permission "main" --add "visitors"
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
 #=================================================

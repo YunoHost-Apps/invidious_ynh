@@ -65,7 +65,7 @@ ynh_remove_app_dependencies
 ynh_script_progression --message="Removing Invidious main directory..." --weight=6
 
 # Remove the app directory securely
-ynh_secure_remove --file="$final_path"
+ynh_secure_remove --file=$final_path
 
 #=================================================
 # REMOVE NGINX CONFIGURATION
