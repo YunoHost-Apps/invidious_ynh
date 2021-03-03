@@ -69,7 +69,10 @@ ynh_script_progression --message="Installing dependencies..." --weight=9
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 # Install Crystal
-ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt crystal main" --package="crystal" --key="https://keybase.io/crystal/pgp_keys.asc"
+#ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt crystal main" --package="crystal" --key="https://keybase.io/crystal/pgp_keys.asc"
+
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D4
+ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all nightly" --append
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
