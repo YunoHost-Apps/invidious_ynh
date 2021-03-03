@@ -3,7 +3,7 @@ feed_threads: 1
 
 db:
   user: __DB_NAME__
-  password: __DB_PASS__
+  password: __DB_PWD__
   host: localhost
   port: 5432
   dbname: __DB_NAME__
