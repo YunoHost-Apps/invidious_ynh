@@ -46,9 +46,9 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain    --value=$domain
-ynh_app_setting_set --app=$app --key=path      --value=$path_url
-ynh_app_setting_set --app=$app --key=language  --value=$language
+ynh_app_setting_set --app=$app --key=domain   --value=$domain
+ynh_app_setting_set --app=$app --key=path     --value=$path_url
+ynh_app_setting_set --app=$app --key=language --value=$language
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -71,7 +71,7 @@ ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 # Install Crystal
 #ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt crystal main" --package="crystal" --key="https://keybase.io/crystal/pgp_keys.asc"
 
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D4
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
 ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all nightly" --append
 
 #=================================================
