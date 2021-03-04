@@ -46,10 +46,9 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain    --value=$domain
-ynh_app_setting_set --app=$app --key=path      --value=$path_url
-ynh_app_setting_set --app=$app --key=is_public --value=$is_public
-ynh_app_setting_set --app=$app --key=language  --value=$language
+ynh_app_setting_set --app=$app --key=domain   --value=$domain
+ynh_app_setting_set --app=$app --key=path     --value=$path_url
+ynh_app_setting_set --app=$app --key=language --value=$language
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -67,10 +66,10 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=9
 
-ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
 
-# Install Crystal
-ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt crystal main" --package="crystal" --key="https://keybase.io/crystal/pgp_keys.asc"
+ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -180,7 +179,7 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action=start --log_path="systemd"
+ynh_systemd_action --service_name=$app --action=start --log_path=systemd
 
 #=================================================
 # SETUP SSOWAT

@@ -82,6 +82,9 @@ chown -R $app: $final_path
 #=================================================
 ynh_script_progression --message="Reinstalling dependencies..." --weight=7
 
+ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
+
 # Define and install dependencies
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
@@ -114,7 +117,7 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action=start --log_path="systemd"
+ynh_systemd_action --service_name=$app --action=start --log_path=systemd
 
 #=================================================
 # RESTORE VARIOUS FILES
