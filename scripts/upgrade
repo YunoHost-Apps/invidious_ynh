@@ -18,13 +18,12 @@ app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
-is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 port=$(ynh_app_setting_get --app=$app --key=port)
 language=$(ynh_app_setting_get --app=$app --key=language)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$db_name
-db_pwd=$(ynh_app_setting_get --app=$app --key=db_pwd)
+db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 
 #=================================================
 # CHECK VERSION
@@ -54,17 +53,17 @@ ynh_abort_if_errors
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
+ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
-ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
 
-# Install Crystal
-ynh_install_extra_app_dependencies --repo="deb https://dist.crystal-lang.org/apt crystal main" --package="crystal" --key="https://keybase.io/crystal/pgp_keys.asc"
+ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -104,14 +103,9 @@ ynh_system_user_create --username=$app
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=3
 
-cp ../conf/config.yml "$final_path/config/config.yml"
+ynh_backup_if_checksum_is_different --file="$final_path/config/config.yml"
 
-# Main config File
-ynh_replace_string --match_string="__DB_NAME__" --replace_string="$db_name" --target_file="$final_path/config/config.yml"
-ynh_replace_string --match_string="__DB_PASS__" --replace_string="$db_pwd" --target_file="$final_path/config/config.yml"
-#ynh_replace_string --match_string="__DOMAIN__" --replace_string="$domain" --target_file="$final_path/config/config.yml"
-ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="$final_path/config/config.yml"
-ynh_replace_string --match_string="__LANGUAGE__" --replace_string="$language" --target_file="$final_path/config/config.yml"
+ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
 
 ynh_store_file_checksum --file="$final_path/config/config.yml"
 
@@ -119,9 +113,6 @@ ynh_store_file_checksum --file="$final_path/config/config.yml"
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=2
-
-ynh_replace_string --match_string="__APP__" --replace_string="$app" --target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__FINAL_PATH__" --replace_string="$final_path" --target_file="../conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
@@ -157,7 +148,7 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="restart" --log_path="systemd"
+ynh_systemd_action --service_name=$app --action=restart --log_path=systemd
 
 #=================================================
 # RELOAD NGINX
