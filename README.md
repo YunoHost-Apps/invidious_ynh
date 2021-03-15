@@ -28,7 +28,7 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 ## Documentation
 
  * Official documentation: https://github.com/iv-org/documentation
- * YunoHost documentation: https://yunohost.org/#/app_invidious
+ * YunoHost documentation: https://yunohost.org/en/app_invidious
 
 ## YunoHost specific features
 
