@@ -13,7 +13,7 @@
         "name": "eric_G"
     },
     "requirements": {
-        "yunohost": ">= 4.0.0"
+        "yunohost": ">= 4.1.7"
     },
     "multi_instance": false,
     "services": [
@@ -24,19 +24,11 @@
             {
                 "name": "domain",
                 "type": "domain",
-                "ask": {
-                    "en": "Choose a domain name for Invidious",
-                    "fr": "Choisissez un nom de domaine pour Invidious"
-                },
                 "example": "domain.org"
             },
             {
                 "name": "is_public",
                 "type": "boolean",
-                "ask": {
-                    "en": "Is it a public site?",
-                    "fr": "Est-ce un site public ?"
-                },
                 "help": {
                     "en": "If enabled, Invidious will be accessible by people who do not have an account. This can be changed later via the webadmin.",
                     "fr": "Si cette case est cochée, Invidious sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
