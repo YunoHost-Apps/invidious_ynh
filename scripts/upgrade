@@ -75,7 +75,7 @@ ynh_script_progression --message="Upgrading dependencies..." --weight=8
 #ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
 #ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
 
-curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36
+ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
@@ -117,11 +117,7 @@ ynh_system_user_create --username=$app
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=3
 
-ynh_backup_if_checksum_is_different --file="$final_path/config/config.yml"
-
 ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
-
-ynh_store_file_checksum --file="$final_path/config/config.yml"
 
 #=================================================
 # SETUP SYSTEMD
