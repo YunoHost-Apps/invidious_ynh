@@ -90,7 +90,7 @@ then
 	git clone https://github.com/iv-org/invidious "$final_path" --quiet
 	pushd "$final_path" || ynh_die
 		shards update && shards install
-		crystal build $final_path/src/invidious.cr --release
+		crystal build $final_path/src/invidious.cr --release --ignore-crystal-version
 	popd || ynh_die
 fi
 

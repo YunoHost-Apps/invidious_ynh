@@ -122,7 +122,7 @@ ynh_script_progression --message="Building Invidious.. (this will take some time
 
 pushd "$final_path" || ynh_die
 	shards update && shards install
-	crystal build $final_path/src/invidious.cr --release
+	crystal build $final_path/src/invidious.cr --release --ignore-crystal-version
 popd || ynh_die
 
 #=================================================
