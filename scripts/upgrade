@@ -72,8 +72,10 @@ ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 #=================================================
 ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
-ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
+#ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+#ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
+
+curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
@@ -90,7 +92,7 @@ then
 	git clone https://github.com/iv-org/invidious "$final_path" --quiet
 	pushd "$final_path" || ynh_die
 		shards update && shards install
-		crystal build $final_path/src/invidious.cr --release --ignore-crystal-version
+		crystal build $final_path/src/invidious.cr --release
 	popd || ynh_die
 fi
 
