@@ -87,13 +87,25 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
+	tmpdir="$(mktemp -d)"
+
+	# Backup the config file in the temp dir
+	cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
+
 	# Remove the app directory securely
 	ynh_secure_remove --file=$final_path
+
 	git clone https://github.com/iv-org/invidious "$final_path" --quiet
 	pushd "$final_path" || ynh_die
 		shards update && shards install
 		crystal build $final_path/src/invidious.cr --release
 	popd || ynh_die
+
+	# Copy the admin saved settings from tmp directory to final path	
+	cp -a "$tmpdir/config.yml" "$final_path/config/config.yml" 
+
+	# Remove the tmp directory securely
+	ynh_secure_remove --file="$tmpdir"
 fi
 
 #=================================================
@@ -111,13 +123,6 @@ ynh_script_progression --message="Making sure dedicated system user exists..." -
 
 # Create a dedicated user (if not existing)
 ynh_system_user_create --username=$app
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-ynh_script_progression --message="Modifying a config file..." --weight=3
-
-ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
 
 #=================================================
 # SETUP SYSTEMD
@@ -145,6 +150,7 @@ ynh_script_progression --message="Securing files and directories..." --weight=1
 # Set permissions on app files
 chown -R $app: $final_path
 chmod 0644 /etc/logrotate.d/$app
+chmod 600 $final_path/config/config.yml
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST

@@ -166,6 +166,7 @@ ynh_script_progression --message="Securing files and directories..." --weight=1
 # Set permissions to app files
 chown -R $app: $final_path
 chmod 0644 /etc/logrotate.d/$app
+chmod 600 $final_path/config/config.yml
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
