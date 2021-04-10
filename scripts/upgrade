@@ -149,7 +149,7 @@ ynh_script_progression --message="Securing files and directories..." --weight=1
 
 # Set permissions on app files
 chown -R $app: $final_path
-chmod 0644 /etc/logrotate.d/$app
+chmod -R 755 $final_path/bin
 chmod 600 $final_path/config/config.yml
 
 #=================================================

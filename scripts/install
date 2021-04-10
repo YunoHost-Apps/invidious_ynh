@@ -147,6 +147,7 @@ ynh_add_systemd_config
 ynh_script_progression --message="Setuping a cron..." --weight=1
 
 ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
+chmod 0644 /etc/logrotate.d/$app
 
 #=================================================
 # SETUP LOGROTATE
@@ -165,7 +166,7 @@ ynh_script_progression --message="Securing files and directories..." --weight=1
 
 # Set permissions to app files
 chown -R $app: $final_path
-chmod 0644 /etc/logrotate.d/$app
+chmod -R 755 $final_path/bin
 chmod 600 $final_path/config/config.yml
 
 #=================================================

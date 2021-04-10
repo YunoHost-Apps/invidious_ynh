@@ -39,8 +39,8 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/invidious%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/invidious/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/invidious%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/invidious/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/invidious.svg)](https://ci-apps.yunohost.org/ci/apps/invidious/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/invidious.svg)](https://ci-apps-arm.yunohost.org/ci/apps/invidious/)
 
 ## Limitations
 
