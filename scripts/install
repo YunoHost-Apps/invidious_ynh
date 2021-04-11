@@ -147,7 +147,7 @@ ynh_add_systemd_config
 ynh_script_progression --message="Setuping a cron..." --weight=1
 
 ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
-chmod 0644 /etc/logrotate.d/$app
+chmod 644 /etc/cron.d/$app
 
 #=================================================
 # SETUP LOGROTATE
