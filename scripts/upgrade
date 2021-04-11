@@ -149,7 +149,6 @@ ynh_script_progression --message="Securing files and directories..." --weight=1
 
 # Set permissions on app files
 chown -R $app: $final_path
-chmod -R 755 $final_path/bin
 chmod 600 $final_path/config/config.yml
 
 #=================================================
@@ -165,6 +164,8 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action=restart --log_path=systemd
+
+chmod -R 755 $final_path/bin
 
 #=================================================
 # RELOAD NGINX

@@ -166,7 +166,6 @@ ynh_script_progression --message="Securing files and directories..." --weight=1
 
 # Set permissions to app files
 chown -R $app: $final_path
-chmod -R 755 $final_path/bin
 chmod 600 $final_path/config/config.yml
 
 #=================================================
@@ -183,6 +182,8 @@ ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
 ynh_systemd_action --service_name=$app --action=start --log_path=systemd
+
+chmod -R 755 $final_path/bin
 
 #=================================================
 # SETUP SSOWAT
