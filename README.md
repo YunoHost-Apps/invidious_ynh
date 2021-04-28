@@ -23,7 +23,7 @@ Invidious is an alternative front-end for accessing YouTube videos without going
 
 ## Configuration
 
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yaml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
+You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
 
 ## Documentation
 
