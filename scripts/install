@@ -69,7 +69,9 @@ ynh_script_progression --message="Installing dependencies..." --weight=9
 #ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
 #ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
 
-ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36
+ynh_install_extra_app_dependencies --repo="deb https://dl.bintray.com/crystal/deb all stable" --key="379CE192D401AB61" --package="crystal=0.36.1-1"
+
+#ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36.1-1
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
