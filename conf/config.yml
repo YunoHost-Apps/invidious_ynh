@@ -20,4 +20,3 @@ default_user_preferences:
   local: true
   locale: "__LANGUAGE__"
   comments: ["youtube",""]
-
