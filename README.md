@@ -21,7 +21,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Alternative front-end to YouTube
 
-**Shipped version:** 0.20.1~ynh8
+**Shipped version:** 0.20.1~ynh9
 
 **Demo:** https://invidious.site/
 
