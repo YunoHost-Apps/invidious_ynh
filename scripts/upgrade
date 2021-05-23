@@ -107,6 +107,11 @@ then
 	ynh_secure_remove --file="$tmpdir"
 fi
 
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+chmod 600 $final_path/config/config.yml
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
@@ -140,17 +145,6 @@ ynh_script_progression --message="Upgrading logrotate configuration..." --weight
 
 # Use logrotate to manage app-specific logfile(s)
 ynh_use_logrotate --non-append
-
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-ynh_script_progression --message="Securing files and directories..." --weight=1
-
-# Set permissions on app files
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
-chmod 600 $final_path/config/config.yml
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST

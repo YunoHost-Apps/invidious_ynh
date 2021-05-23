@@ -106,6 +106,10 @@ for i in $final_path/config/sql/*.sql ; do
 	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
 done
 
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
@@ -119,7 +123,7 @@ ynh_add_nginx_config
 #=================================================
 # INSTALL INVIDIOUS
 #=================================================
-ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=10
+ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
 
 pushd "$final_path" || ynh_die
 	shards update && shards install
@@ -132,6 +136,7 @@ popd || ynh_die
 ynh_script_progression --message="Modifying a config file..."
 
 ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
+chmod 600 $final_path/config/config.yml
 
 #=================================================
 # SETUP SYSTEMD
@@ -155,19 +160,6 @@ ynh_script_progression --message="Configuring log rotation..." --weight=1
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-ynh_script_progression --message="Securing files and directories..." --weight=1
-
-# Set permissions to app files
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
-chmod 600 $final_path/config/config.yml
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
