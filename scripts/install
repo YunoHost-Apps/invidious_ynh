@@ -46,8 +46,8 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain   --value=$domain
-ynh_app_setting_set --app=$app --key=path     --value=$path_url
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=language --value=$language
 
 #=================================================
@@ -65,11 +65,6 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 # INSTALL DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=9
-
-#ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-#ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
-
-#ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36 
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
