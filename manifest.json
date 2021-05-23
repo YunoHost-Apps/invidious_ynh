@@ -6,14 +6,21 @@
         "en": "Alternative front-end to YouTube",
         "fr": "Front-end alternatif à YouTube"
     },
-    "version": "0.20.1~ynh8",
+    "version": "0.20.1~ynh9",
     "url": "https://invidio.us/",
+    "upstream": {
+        "license": "GPL-3.0-only",
+        "demo": "https://invidious.site/",
+        "admindoc": "https://yunohost.org/packaging_apps",
+        "userdoc": "https://github.com/iv-org/documentation",
+        "code": "https://github.com/iv-org/invidious"
+    },
     "license": "GPL-3.0-only",
     "maintainer": {
         "name": "eric_G"
     },
     "requirements": {
-        "yunohost": ">= 4.1.7"
+        "yunohost": ">= 4.2.4"
     },
     "multi_instance": false,
     "services": [

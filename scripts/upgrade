@@ -45,6 +45,14 @@ if ynh_legacy_permissions_exists; then
 fi
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+
+# Create a dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
 ynh_script_progression --message="Backing up Invidious before upgrading..." --weight=4
@@ -72,12 +80,11 @@ ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 #=================================================
 ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
-#ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-#ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
-
-ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --crystal=0.36
-
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+
+tempdir="$(mktemp -d)"
+ynh_setup_source --dest_dir=$tempdir --source_id=crystal
+ynh_exec_warn_less dpkg -i $tempdir/crystal_0.36.1-1_amd64.deb
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -87,14 +94,31 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
+	tmpdir="$(mktemp -d)"
+
+	# Backup the config file in the temp dir
+	cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
+
 	# Remove the app directory securely
 	ynh_secure_remove --file=$final_path
+
 	git clone https://github.com/iv-org/invidious "$final_path" --quiet
 	pushd "$final_path" || ynh_die
 		shards update && shards install
 		crystal build $final_path/src/invidious.cr --release
 	popd || ynh_die
+
+	# Copy the admin saved settings from tmp directory to final path	
+	cp -a "$tmpdir/config.yml" "$final_path/config/config.yml" 
+
+	# Remove the tmp directory securely
+	ynh_secure_remove --file="$tmpdir"
 fi
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+chmod 600 $final_path/config/config.yml
 
 #=================================================
 # NGINX CONFIGURATION
@@ -103,21 +127,6 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-ynh_script_progression --message="Modifying a config file..." --weight=3
-
-ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
 
 #=================================================
 # SETUP SYSTEMD
@@ -136,15 +145,6 @@ ynh_script_progression --message="Upgrading logrotate configuration..." --weight
 
 # Use logrotate to manage app-specific logfile(s)
 ynh_use_logrotate --non-append
-
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-ynh_script_progression --message="Securing files and directories..." --weight=1
-
-# Set permissions on app files
-chown -R $app: $final_path
-chmod 0644 /etc/logrotate.d/$app
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
