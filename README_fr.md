@@ -1,59 +1,47 @@
 # Invidious pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
-[![Installer Invidious avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
+[![Niveau d'intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg)  ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
+[![Installer invidious avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
-*[Read this readme in english.](./README.md)* 
+*[Read this readme in english.](./README.md)*
+*[Lire ce readme en français.](./README_fr.md)*
 
-> *Ce package vous permet d'installer Invidious rapidement et simplement sur un serveur YunoHost.  
-Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/install) pour apprendre comment l'installer.*
+> *This package allows you to install invidious quickly and simply on a YunoHost server.
+If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
 
 ## Vue d'ensemble
-Invidious est une interface permettant d'accéder aux vidéos YouTube sans passer par youtube.com.
 
-**Version incluse :** 0.20.1
+Front-end alternatif à YouTube
+
+**Version incluse:** 0.20.1~ynh8
+
+**Démo:** https://invidious.site/
+
 
 ## Captures d'écran
 
-![](sources/screenshot.png)
 
-## Démo
+   ![](./doc/screenshots/screenshot.png)
 
-* [Démo officielle](https://invidious.site/)
+
+
+
+## Avertissements / informations importantes
 
 ## Configuration
 
 Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/www/invidious/config/config.yaml` avec l'aide de cette [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
 
-## Documentation
 
- * Documentation officielle : https://github.com/iv-org/documentation
- * Documentation YunoHost : https://yunohost.org/fr/app_invidious
 
-## Caractéristiques spécifiques YunoHost
+## Documentations et ressources
 
-#### Support multi-utilisateur
 
-* L'authentification LDAP est-elle prise en charge ? **Non**
-* L'application peut-elle être utilisée par plusieurs utilisateurs ? **Oui**
-
-#### Architectures supportées
-
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/invidious.svg)](https://ci-apps.yunohost.org/ci/apps/invidious/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/invidious.svg)](https://ci-apps-arm.yunohost.org/ci/apps/invidious/)
-
-## Limitations
-
-Invidious nécessite un domaine racine dédié, par exemple. invidious.domain.tld  
-> :warning: Pour installer Invidious, vous avez besoin d'au moins 2 Go de RAM disponible.
-
-## Liens
-
- * Signaler un bug : https://github.com/YunoHost-Apps/invidious_ynh/issues
- * Dépôt de l'application principale : https://github.com/iv-org/invidious
- * Site web YunoHost : https://yunohost.org/
-
----
+* Documentation officielle utilisateur: https://github.com/iv-org/documentation
+* Documentation officielle de l'admin: https://yunohost.org/packaging_apps
+* Dépôt de code officiel de l'app:  https://github.com/iv-org/invidious
+* Documentation YunoHost pour cette app: https://yunohost.org/app_invidious
+* Signaler un bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
 
 ## Informations pour les développeurs
 
@@ -61,7 +49,9 @@ Merci de faire vos pull request sur la [branche testing](https://github.com/Yuno
 
 Pour essayer la branche testing, procédez comme suit.
 ```
-sudo yunohost app install https://github.com/YunoHost-Apps/navidrome_ynh/tree/testing --debug
-ou
+sudo yunohost app install https://github.com/YunoHost-Apps/invidious_ynh/tree/testing --debug
+or
 sudo yunohost app upgrade invidious -u https://github.com/YunoHost-Apps/invidious_ynh/tree/testing --debug
 ```
+
+**Plus d'infos sur le packaging d'applications:** https://yunohost.org/packaging_apps
