@@ -64,13 +64,21 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=9
+ynh_script_progression --message="Installing dependencies..." --weight=15
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 tempdir="$(mktemp -d)"
 ynh_setup_source --dest_dir=$tempdir --source_id=crystal
 ynh_exec_warn_less dpkg -i $tempdir/crystal_0.36.1-1_amd64.deb
+
+#=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Configuring system user..." --weight=1
+
+# Create a system user
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -82,14 +90,6 @@ db_user=$db_name
 ynh_app_setting_set --app=$app --key=db_name --value=$db_name
 ynh_psql_test_if_first_run
 ynh_psql_setup_db --db_user=$db_name --db_name=$db_name
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
-
-# Create a system user
-ynh_system_user_create --username=$app --home_dir=$final_path
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

@@ -53,26 +53,20 @@ ynh_script_progression --message="Restoring the NGINX configuration..."
 ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
+# RECREATE THE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Recreating the dedicated system user..." --weight=1
+
+# Create the dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
 ynh_script_progression --message="Restoring Invidious main directory..." --weight=4
 
 ynh_restore_file --origin_path="$final_path"
 
-#=================================================
-# RECREATE THE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Recreating the dedicated system user..." --weight=1
-
-# Create the dedicated user (if not existing)
-ynh_system_user_create --username=$app
-
-#=================================================
-# RESTORE USER RIGHTS
-#=================================================
-ynh_script_progression --message="Restoring user rights..."
-
-# Restore permissions on app files
 chmod 750 "$final_path"
 chmod -R o-rwx "$final_path"
 chown -R $app:www-data "$final_path"
@@ -84,11 +78,12 @@ chown -R $app:www-data "$final_path"
 #=================================================
 ynh_script_progression --message="Reinstalling dependencies..." --weight=7
 
-ynh_exec_warn_less apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-ynh_install_extra_repo --repo="deb https://dl.bintray.com/crystal/deb all stable" --append
-
 # Define and install dependencies
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+
+tempdir="$(mktemp -d)"
+ynh_setup_source --dest_dir=$tempdir --source_id=crystal
+ynh_exec_warn_less dpkg -i $tempdir/crystal_0.36.1-1_amd64.deb
 
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
