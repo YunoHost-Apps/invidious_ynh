@@ -5,37 +5,11 @@ It shall NOT be edited by hand.
 
 # Invidious for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
-[![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
+[![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg)  ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
+[![Install invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
 *[Lire ce readme en français.](./README_fr.md)*
 
-> *This package allows you to install Invidious quickly and simply on a YunoHost server.
-If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
-
-## Overview
-
-Alternative front-end to YouTube
-
-**Shipped version:** 0.20.1~ynh9
-
-**Demo:** https://invidious.site/
-
-## Screenshots
-
-![](./doc/screenshots/screenshot.png)
-
-## Disclaimers / important information
-
-## Configuration
-
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
-
-## Documentation and resources
-
-* Official user documentation: https://github.com/iv-org/documentation
-* Official admin documentation: https://yunohost.org/packaging_apps
-* Upstream app code repository: https://github.com/iv-org/invidious
 * YunoHost documentation for this app: https://yunohost.org/app_invidious
 * Report a bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
 
