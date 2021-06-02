@@ -1,7 +1,7 @@
 # Invidious pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg)  ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
-[![Installer invidious avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
+[![Niveau d'intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
+[![Installer Invidious avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
 *[Read this readme in english.](./README.md)*
 *[Lire ce readme en français.](./README_fr.md)*
@@ -23,7 +23,9 @@ Front-end alternatif à YouTube
 
 ## Avertissements / informations importantes
 
-## Captures d'écran
+## Configuration
+
+Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/www/invidious/config/config.yaml` avec l'aide de cette [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
 
 ## Documentations et ressources
 
