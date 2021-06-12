@@ -1,0 +1,7 @@
+SOURCE_URL=https://github.com/iv-org/invidious/archive/a0fb75efcb14f95f44e427db9cae0d0c03ccfa2a.tar.gz
+SOURCE_SUM=eadb72ad3b61cbfebbe5b32d011a312e6e9bb093680cb2916547bf49dab0b0a1
+SOURCE_SUM_PRG=sha256sum
+SOURCE_FORMAT=tar.gz
+SOURCE_IN_SUBDIR=true
+SOURCE_FILENAME=
+SOURCE_EXTRACT=true
