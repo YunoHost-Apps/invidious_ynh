@@ -83,7 +83,7 @@ ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 tempdir="$(mktemp -d)"
 ynh_setup_source --dest_dir=$tempdir --source_id=crystal
-ynh_exec_warn_less dpkg -i $tempdir/crystal_0.36.1-1_amd64.deb
+ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
 
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
