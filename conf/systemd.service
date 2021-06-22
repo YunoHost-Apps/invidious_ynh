@@ -10,7 +10,7 @@ Group=__APP__
 WorkingDirectory=__FINALPATH__
 ExecStart=__FINALPATH__/invidious -o invidious.log -p __PORT__
 RestartSec=2s
-Restart=always
+Restart=no
 
 [Install]
 WantedBy=multi-user.target
