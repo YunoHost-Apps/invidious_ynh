@@ -60,7 +60,7 @@ ynh_backup --src_path="/etc/logrotate.d/$app"
 #=================================================
 
 ynh_backup --src_path="/etc/systemd/system/$app.service"
-ynh_backup --src_path="/etc/systemd/system/invidious.timer"
+ynh_backup --src_path="/etc/systemd/system/$app.timer"
 
 #=================================================
 # BACKUP VARIOUS FILES
