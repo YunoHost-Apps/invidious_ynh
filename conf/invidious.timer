@@ -1,0 +1,10 @@
+# /etc/systemd/system/invidious.timer
+
+[Unit]
+Description=Lance Invidious toutes les heures
+
+[Timer]
+OnCalendar=hourly
+
+[Install]
+WantedBy=timers.target

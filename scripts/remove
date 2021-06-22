@@ -70,6 +70,12 @@ ynh_script_progression --message="Removing Invidious main directory..." --weight
 ynh_secure_remove --file="$final_path"
 
 #=================================================
+# REMOVE SYSTEMD TIMER
+#=================================================
+
+ynh_secure_remove --file="/etc/systemd/system/invidious.timer"
+
+#=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Removing NGINX web server configuration..." --weight=5

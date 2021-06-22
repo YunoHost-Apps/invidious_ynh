@@ -100,6 +100,7 @@ ynh_psql_execute_file_as_root --file="./db.sql" --database=$db_name
 ynh_script_progression --message="Restoring the systemd configuration..." --weight=5
 
 ynh_restore_file --origin_path="/etc/systemd/system/$app.service"
+ynh_restore_file --origin_path="/etc/systemd/system/invidious.timer"
 systemctl enable $app.service --quiet
 
 #=================================================
