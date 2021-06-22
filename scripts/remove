@@ -73,7 +73,7 @@ ynh_secure_remove --file="$final_path"
 # REMOVE SYSTEMD TIMER
 #=================================================
 
-ynh_secure_remove --file="/etc/systemd/system/invidious.timer"
+ynh_secure_remove --file="/etc/systemd/system/$app.timer"
 
 #=================================================
 # REMOVE NGINX CONFIGURATION
