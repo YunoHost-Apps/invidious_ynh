@@ -116,7 +116,8 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action=start --log_path=systemd
-ynh_systemd_action --service_name=$app.timer --action=start --log_path=systemd
+systemctl enable $app.timer
+systemctl start $app.timer
 
 #=================================================
 # RESTORE VARIOUS FILES

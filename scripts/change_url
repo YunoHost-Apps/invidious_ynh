@@ -29,10 +29,6 @@ ynh_script_progression --message="Loading installation settings..." --weight=1
 # Needed for helper "ynh_add_nginx_config"
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 port=$(ynh_app_setting_get --app=$app --key=port)
-# Add settings here as needed by your application
-#db_name=$(ynh_app_setting_get --app=$app --key=db_name)
-#db_user=$db_name
-#db_pwd=$(ynh_app_setting_get --app=$app --key=db_pwd)
 
 #=================================================
 # BACKUP BEFORE CHANGE URL THEN ACTIVE TRAP
@@ -75,7 +71,7 @@ fi
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action="stop" --log_path=systemd
-ynh_systemd_action --service_name=$app.timer --action="stop" --log_path=systemd
+systemctl stop $app.timer
 
 #=================================================
 # MODIFY URL IN NGINX CONF
@@ -114,7 +110,8 @@ fi
 ynh_script_progression --message="Starting a systemd service..." --weight=3
 
 ynh_systemd_action --service_name=$app --action="start" --log_path=systemd
-ynh_systemd_action --service_name=$app.timer --action=start --log_path=systemd
+systemctl enable $app.timer
+systemctl start $app.timer
 
 #=================================================
 # RELOAD NGINX
