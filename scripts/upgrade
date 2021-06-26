@@ -82,7 +82,6 @@ ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
-
 tempdir="$(mktemp -d)"
 ynh_setup_source --dest_dir=$tempdir --source_id=crystal
 ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
@@ -101,14 +100,20 @@ then
 	cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
 
 	# Remove the app directory securely
-	#ynh_secure_remove --file=$final_path
+	ynh_secure_remove --file=$final_path
 
-	#git clone https://github.com/iv-org/invidious "$final_path" --quiet
-	pushd $final_path
-		git pull
+	git clone https://github.com/iv-org/invidious "$final_path" --quiet
+	pushd "$final_path" || ynh_die
 		shards update && shards install
 		crystal build $final_path/src/invidious.cr --release
-	popd
+	popd || ynh_die
+
+	#git clone https://github.com/iv-org/invidious "$final_path" --quiet
+	# pushd $final_path
+	# 	git pull
+	# 	shards update && shards install
+	# 	crystal build $final_path/src/invidious.cr --release
+	# popd
 
 	# Copy the admin saved settings from tmp directory to final path	
 	cp -a "$tmpdir/config.yml" "$final_path/config/config.yml" 
