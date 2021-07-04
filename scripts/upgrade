@@ -74,6 +74,7 @@ ynh_abort_if_errors
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
+systemctl stop $app.timer
 
 #=================================================
 # UPGRADE DEPENDENCIES
@@ -81,7 +82,6 @@ ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
-
 
 tempdir="$(mktemp -d)"
 ynh_setup_source --dest_dir=$tempdir --source_id=crystal
@@ -99,9 +99,6 @@ then
 
 	# Backup the config file in the temp dir
 	cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
-
-	# Remove the app directory securely
-	#ynh_secure_remove --file=$final_path
 
 	#git clone https://github.com/iv-org/invidious "$final_path" --quiet
 	pushd $final_path
@@ -136,6 +133,7 @@ ynh_add_nginx_config
 ynh_script_progression --message="Configuring a systemd service..." --weight=2
 
 # Create a dedicated systemd config
+ynh_add_config --template="../conf/invidious.timer" --destination="/etc/systemd/system/$app.timer"
 ynh_add_systemd_config
 
 #=================================================
@@ -161,6 +159,8 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action=restart --log_path=systemd
+systemctl enable $app.timer
+systemctl start $app.timer
 
 #=================================================
 # RELOAD NGINX
