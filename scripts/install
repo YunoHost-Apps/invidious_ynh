@@ -68,9 +68,16 @@ ynh_script_progression --message="Installing dependencies..." --weight=15
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
-tempdir="$(mktemp -d)"
-ynh_setup_source --dest_dir=$tempdir --source_id=crystal
-ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
+if [ -n "$(uname -m | grep arm)" ]; then
+	ynh_install_extra_app_dependencies --repo="deb http://public.portalier.com raspbian/
+	" --package="crystal" --key="http://public.portalier.com/raspbian/julien%40portalier.com-005faf9e.pub
+	" 2>/dev/null
+else 
+	tempdir="$(mktemp -d)"
+	ynh_setup_source --dest_dir=$tempdir --source_id=crystal
+	ymlnh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
+fi
+
 
 #=================================================
 # CREATE DEDICATED USER
@@ -99,7 +106,7 @@ ynh_script_progression --message="Setting up source files..." --weight=4
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
 # Download, check integrity, uncompress and patch the source from GitHub
-git clone https://github.com/iv-org/invidious "$final_path" --quiet
+git clone --quiet https://github.com/iv-org/invidious "$final_path" 
 
 for i in $final_path/config/sql/*.sql ; do
 	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
