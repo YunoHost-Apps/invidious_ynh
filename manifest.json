@@ -11,7 +11,7 @@
     "upstream": {
         "license": "GPL-3.0-only",
         "demo": "https://invidious.site/",
-        "admindoc": "https://yunohost.org/packaging_apps",
+        "admindoc": "https://docs.invidious.io/",
         "userdoc": "https://github.com/iv-org/documentation",
         "code": "https://github.com/iv-org/invidious"
     },
