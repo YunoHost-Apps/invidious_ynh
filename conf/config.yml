@@ -76,7 +76,7 @@ port: __PORT__
 ## Accepted values: 1-65535
 ## Default: <none>
 ##
-#external_port:
+external_port: __PORT__
 
 ##
 ## Interface address to listen on for incoming connections.
@@ -106,7 +106,7 @@ domain: __DOMAIN__
 ## Accepted values: true, false
 ## Default: false
 ##
-https_only: false
+https_only: true
 
 ##
 ## Enable/Disable 'Strict-Transport-Security'. Make sure that
@@ -115,7 +115,7 @@ https_only: false
 ## Accepted values: true, false
 ## Default: true
 ##
-#hsts: true
+hsts: true
 
 
 # -----------------------------
@@ -545,7 +545,7 @@ default_user_preferences:
   ## Accepted values: true, false
   ## Default: <none>
   ##
-  dark_mode: true
+  #dark_mode: true
 
   ##
   ## Enable/Disable thin mode (no video thumbnails).
@@ -695,7 +695,7 @@ default_user_preferences:
   ## Accepted values: dash, hd720, medium, small
   ## Default: hd720
   ##
-  #quality: hd720
+  quality: dash
 
   ##
   ## Default dash video quality.
@@ -708,7 +708,7 @@ default_user_preferences:
   ##    720p, 480p, 360p, 240p, 144p, worst
   ## Default: auto
   ##
-  #quality_dash: auto
+  quality_dash: auto
 
   ##
   ## Default video playback speed.

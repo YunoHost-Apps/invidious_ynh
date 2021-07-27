@@ -6,7 +6,7 @@
         "en": "Alternative front-end to YouTube",
         "fr": "Front-end alternatif à YouTube"
     },
-    "version": "0.20.1~ynh10",
+    "version": "0.20.1~ynh11",
     "url": "https://invidio.us/",
     "upstream": {
         "license": "GPL-3.0-only",
@@ -49,8 +49,8 @@
                     "en": "Choose the application language",
                     "fr": "Choisissez la langue de l'application"
                 },
-                "choices": ["fr", "en", "de"],
-                "default": "en"
+                "choices": ["de", "en-US", "es", "fr", "it", "nl", "pt-PT"],
+                "default": "fr"
             }
         ]
     }
