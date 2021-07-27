@@ -30,6 +30,7 @@ Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/
 ## Limitations
 
 * Invidious a besoin de plus de 3Go de RAM pour être installé.
+
 ## Documentations et ressources
 
 * Documentation officielle utilisateur : https://github.com/iv-org/documentation

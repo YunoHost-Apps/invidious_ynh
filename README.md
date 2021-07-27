@@ -34,6 +34,7 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 ## Limitations
 
 * Invidious needs more than 2GB of RAM to build.
+
 ## Documentation and resources
 
 * Official user documentation: https://github.com/iv-org/documentation
