@@ -28,7 +28,6 @@ db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 #=================================================
 # CHECK VERSION
 #=================================================
-ynh_script_progression --message="Checking version..."
 
 upgrade_type=$(ynh_check_app_version_changed)
 
@@ -82,7 +81,6 @@ ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
-
 tempdir="$(mktemp -d)"
 ynh_setup_source --dest_dir=$tempdir --source_id=crystal
 ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
@@ -95,10 +93,10 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-	tmpdir="$(mktemp -d)"
+	#tmpdir="$(mktemp -d)"
 
 	# Backup the config file in the temp dir
-	cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
+	#cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
 
 	# Remove the app directory securely
 	#ynh_secure_remove --file=$final_path
@@ -111,10 +109,10 @@ then
 	popd
 
 	# Copy the admin saved settings from tmp directory to final path	
-	cp -a "$tmpdir/config.yml" "$final_path/config/config.yml" 
+	#cp -a "$tmpdir/config.yml" "$final_path/config/config.yml" 
 
 	# Remove the tmp directory securely
-	ynh_secure_remove --file="$tmpdir"
+	#ynh_secure_remove --file="$tmpdir"
 fi
 
 chmod 750 "$final_path"
@@ -129,6 +127,14 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+ynh_script_progression --message="Modifying a config file..."
+
+ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
+chmod 600 $final_path/config/config.yml
 
 #=================================================
 # SETUP SYSTEMD
