@@ -34,7 +34,7 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 ## Documentation and resources
 
 * Official user documentation: https://github.com/iv-org/documentation
-* Official admin documentation: https://yunohost.org/packaging_apps
+* Official admin documentation: https://docs.invidious.io/
 * Upstream app code repository: https://github.com/iv-org/invidious
 * YunoHost documentation for this app: https://yunohost.org/app_invidious
 * Report a bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
