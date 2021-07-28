@@ -101,7 +101,7 @@ then
 
 	pushd $final_path
 		git fetch
-      	git checkout master
+      	#git checkout master
 		git pull
 		git reset --hard --quiet $version_commit
 		shards update && shards install
