@@ -17,7 +17,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Alternative front-end to YouTube
 
-**Shipped version:** 0.20.1~ynh11
+**Shipped version:** 28.07.21~ynh1
 
 **Demo:** https://invidious.site/
 
@@ -29,7 +29,7 @@ Alternative front-end to YouTube
 
 ## Configuration
 
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
+You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://docs.invidious.io/Configuration.md).
 
 ## Limitations
 

@@ -99,12 +99,11 @@ then
 	# Backup the config file in the temp dir
 	#cp -a "$final_path/config/config.yml" "$tmpdir/config.yml"
 
-	# Remove the app directory securely
-	#ynh_secure_remove --file=$final_path
-
-	#git clone https://github.com/iv-org/invidious "$final_path" --quiet
 	pushd $final_path
+		git fetch
+      	#git checkout master
 		git pull
+		git reset --hard --quiet $version_commit
 		shards update && shards install
 		crystal build $final_path/src/invidious.cr --release
 	popd
