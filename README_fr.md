@@ -13,7 +13,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 Front-end alternatif à YouTube
 
-**Version incluse :** 28.07.21~ynh1
+**Version incluse :** 28.07.21~ynh2
 
 **Démo :** https://invidious.site/
 
