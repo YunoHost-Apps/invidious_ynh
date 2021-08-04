@@ -76,7 +76,7 @@ port: __PORT__
 ## Accepted values: 1-65535
 ## Default: <none>
 ##
-external_port: __PORT__
+external_port: 80
 
 ##
 ## Interface address to listen on for incoming connections.
