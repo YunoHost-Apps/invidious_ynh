@@ -101,8 +101,8 @@ then
 
 	pushd $final_path
 		git fetch
-      	#git checkout master
-      	git reset --hard --quiet $version_commit
+    #git checkout master
+    git reset --hard --quiet $version_commit
 		git pull
 		shards update && shards install
 		crystal build $final_path/src/invidious.cr --release
