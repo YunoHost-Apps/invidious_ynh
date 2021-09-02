@@ -105,7 +105,7 @@ then
     git reset --hard --quiet $version_commit
 		git pull
 		shards update && shards install
-		crystal build $final_path/src/invidious.cr --release
+		crystal build $final_path/src/invidious.cr #--release
 	popd
 
 	# Copy the admin saved settings from tmp directory to final path	
