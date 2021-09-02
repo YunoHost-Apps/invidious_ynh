@@ -139,14 +139,6 @@ ynh_add_config --template="../conf/config.yml" --destination="$final_path/config
 chmod 600 $final_path/config/config.yml
 
 #=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
-
-ynh_add_config --template="../conf/invidious.timer" --destination="/etc/systemd/system/$app.timer"
-ynh_add_systemd_config
-
-#=================================================
 # SETUP CRON
 #=================================================
 ynh_script_progression --message="Setuping a cron..." --weight=1
@@ -170,14 +162,21 @@ ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
+# CONFIGURE SYSTEMD TIMER
+#=================================================
+ynh_script_progression --message="Configuring a timer service..." --weight=1
+
+ynh_add_config --template="../conf/systemd.timer" --destination="/etc/systemd/system/$app.timer"
+systemctl enable $app.timer --quiet
+systemctl start $app.timer
+
+#=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
 ynh_systemd_action --service_name=$app --action=start --log_path=systemd
-systemctl enable $app.timer
-systemctl start $app.timer
 
 #=================================================
 # SETUP SSOWAT
@@ -201,4 +200,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of Invidious completed" --last
+ynh_script_progression --message="Installation of $app completed" --last

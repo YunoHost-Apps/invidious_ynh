@@ -42,6 +42,8 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 
 # Remove the dedicated systemd config
 ynh_remove_systemd_config
+# Remove the dedicated timer systemd config
+ynh_secure_remove --file="/etc/systemd/system/$app.timer"
 
 #=================================================
 # REMOVE THE POSTGRESQL DATABASE
@@ -68,12 +70,6 @@ ynh_script_progression --message="Removing Invidious main directory..." --weight
 
 # Remove the app directory securely
 ynh_secure_remove --file="$final_path"
-
-#=================================================
-# REMOVE SYSTEMD TIMER
-#=================================================
-
-ynh_secure_remove --file="/etc/systemd/system/$app.timer"
 
 #=================================================
 # REMOVE NGINX CONFIGURATION

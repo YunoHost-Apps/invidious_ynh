@@ -132,9 +132,12 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=2
 
-# Create a dedicated systemd config
-ynh_add_config --template="../conf/invidious.timer" --destination="/etc/systemd/system/$app.timer"
 ynh_add_systemd_config
+
+# Create a dedicated timer systemd config
+ynh_add_config --template="../conf/systemd.timer" --destination="/etc/systemd/system/$app.timer"
+systemctl enable $app.timer --quiet
+systemctl start $app.timer
 
 #=================================================
 # GENERIC FINALIZATION
@@ -159,8 +162,6 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name=$app --action=restart --log_path=systemd
-systemctl enable $app.timer
-systemctl start $app.timer
 
 #=================================================
 # RELOAD NGINX
