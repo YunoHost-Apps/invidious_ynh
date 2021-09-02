@@ -6,12 +6,12 @@
         "en": "Alternative front-end to YouTube",
         "fr": "Front-end alternatif à YouTube"
     },
-    "version": "0.20.1~ynh10",
+    "version": "21.08.22~ynh1",
     "url": "https://invidio.us/",
     "upstream": {
         "license": "GPL-3.0-only",
         "demo": "https://invidious.site/",
-        "admindoc": "https://yunohost.org/packaging_apps",
+        "admindoc": "https://docs.invidious.io/",
         "userdoc": "https://github.com/iv-org/documentation",
         "code": "https://github.com/iv-org/invidious"
     },
@@ -49,8 +49,8 @@
                     "en": "Choose the application language",
                     "fr": "Choisissez la langue de l'application"
                 },
-                "choices": ["fr", "en", "de"],
-                "default": "en"
+                "choices": ["de", "en-US", "es", "fr", "it", "nl", "pt-PT"],
+                "default": "fr"
             }
         ]
     }

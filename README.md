@@ -17,7 +17,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Alternative front-end to YouTube
 
-**Shipped version:** 0.20.1~ynh10
+**Shipped version:** 21.08.22~ynh1
 
 **Demo:** https://invidious.site/
 
@@ -29,12 +29,16 @@ Alternative front-end to YouTube
 
 ## Configuration
 
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://github.com/iv-org/documentation/blob/master/Configuration.md).
+You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://docs.invidious.io/Configuration.md).
+
+## Limitations
+
+* Invidious needs more than 2GB of RAM to build.
 
 ## Documentation and resources
 
 * Official user documentation: https://github.com/iv-org/documentation
-* Official admin documentation: https://yunohost.org/packaging_apps
+* Official admin documentation: https://docs.invidious.io/
 * Upstream app code repository: https://github.com/iv-org/invidious
 * YunoHost documentation for this app: https://yunohost.org/app_invidious
 * Report a bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
