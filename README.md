@@ -15,7 +15,13 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-Alternative front-end to YouTube
+Invidious is an interface allowing access to Youtube videos without going through youtube.com
+In addition to constituting an advantage in terms of confidentiality (the data does not pass directly through the services of the giant), this interface offers several features:
+- Audio only mode,
+- Dark mode,
+- Ability to display Reddit comments instead of YouTube comments,
+- Ability to subscribe to channels without creating a Google account 
+
 
 **Shipped version:** 21.08.22~ynh1
 
