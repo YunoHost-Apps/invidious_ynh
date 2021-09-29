@@ -6,7 +6,7 @@
         "en": "Alternative front-end to YouTube",
         "fr": "Front-end alternatif à YouTube"
     },
-    "version": "21.08.22~ynh1",
+    "version": "21.09.29~ynh1",
     "url": "https://invidio.us/",
     "upstream": {
         "license": "GPL-3.0-only",
