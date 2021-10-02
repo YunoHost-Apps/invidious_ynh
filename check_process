@@ -23,4 +23,3 @@ Notification=none
 	; commit=d0b65b69558b6a1a98761eb7be0b34b4ccb7d6b3
 		name=Testing (#36) 
 		manifest_arg=domain=DOMAIN&path=PATH&admin=USER&language=fr&is_public=1&password=pass&port=666&
-
