@@ -146,7 +146,8 @@ ynh_add_systemd_config
 ynh_script_progression --message="Setuping a cron..." --weight=1
 
 ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
-chmod 644 /etc/cron.d/$app
+chown root: "/etc/cron.d/$app"
+chmod 644 "/etc/cron.d/$app"
 
 #=================================================
 # GENERIC FINALIZATION
