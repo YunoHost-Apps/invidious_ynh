@@ -131,12 +131,14 @@ ynh_systemd_action --service_name=$app --action=start --log_path=systemd
 #=================================================
 # RESTORE VARIOUS FILES
 #=================================================
+ynh_script_progression --message="Restoring various files..." --weight=1
 
 ynh_restore_file --origin_path="/etc/cron.d/$app"
 
 #=================================================
 # RESTORE THE LOGROTATE CONFIGURATION
 #=================================================
+ynh_script_progression --message="Restoring the logrotate configuration..." --weight=1
 
 ynh_restore_file --origin_path="/etc/logrotate.d/$app"
 
