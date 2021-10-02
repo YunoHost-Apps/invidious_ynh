@@ -129,10 +129,10 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
 
-pushd "$final_path" || ynh_die
+pushd "$final_path"
 	shards update && shards install
 	crystal build $final_path/src/invidious.cr --release
-popd || ynh_die
+popd
 
 #=================================================
 # MODIFY A CONFIG FILE

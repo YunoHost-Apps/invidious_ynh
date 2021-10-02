@@ -32,26 +32,6 @@ db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 upgrade_type=$(ynh_check_app_version_changed)
 
 #=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
-
-# Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
-
-	ynh_app_setting_delete --app=$app --key=is_public
-fi
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
-
-#=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
 ynh_script_progression --message="Backing up Invidious before upgrading..." --weight=4
@@ -75,16 +55,24 @@ ynh_script_progression --message="Stopping a systemd service..." --weight=1
 ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 
 #=================================================
-# UPGRADE DEPENDENCIES
+# ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=8
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
-ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
 
+	ynh_app_setting_delete --app=$app --key=is_public
+fi
 
-tempdir="$(mktemp -d)"
-ynh_setup_source --dest_dir=$tempdir --source_id=crystal
-ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
+#=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+
+# Create a dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -126,6 +114,17 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
+
+#=================================================
+# UPGRADE DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Upgrading dependencies..." --weight=8
+
+ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+
+tempdir="$(mktemp -d)"
+ynh_setup_source --dest_dir=$tempdir --source_id=crystal
+ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
 
 #=================================================
 # MODIFY A CONFIG FILE
