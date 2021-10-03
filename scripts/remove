@@ -88,6 +88,7 @@ ynh_remove_logrotate
 #=================================================
 # REMOVE VARIOUS FILES
 #=================================================
+ynh_script_progression --message="Removing the cron file..." --weight=1
 
 # Remove a cron file
 ynh_secure_remove --file="/etc/cron.d/$app"

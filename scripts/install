@@ -68,9 +68,7 @@ ynh_script_progression --message="Installing dependencies..." --weight=15
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
-tempdir="$(mktemp -d)"
-ynh_setup_source --dest_dir=$tempdir --source_id=crystal
-ynh_exec_warn_less dpkg -i $tempdir/crystal_1.0.0-1_amd64.deb
+ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
 
 #=================================================
 # CREATE DEDICATED USER
@@ -129,10 +127,10 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
 
-pushd "$final_path" || ynh_die
-	shards update && shards install
-	crystal build $final_path/src/invidious.cr --release
-popd || ynh_die
+pushd "$final_path"
+	ynh_exec_warn_less shards update && shards install
+	ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
+popd
 
 #=================================================
 # MODIFY A CONFIG FILE
@@ -155,7 +153,8 @@ ynh_add_systemd_config
 ynh_script_progression --message="Setuping a cron..." --weight=1
 
 ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
-chmod 644 /etc/cron.d/$app
+chown root: "/etc/cron.d/$app"
+chmod 644 "/etc/cron.d/$app"
 
 #=================================================
 # SETUP LOGROTATE
