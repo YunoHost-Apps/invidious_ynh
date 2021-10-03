@@ -79,7 +79,7 @@ ynh_script_progression --message="Reinstalling dependencies..." --weight=7
 # Define and install dependencies
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
-curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=nightly
+ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
 
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
