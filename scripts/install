@@ -99,9 +99,11 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from GitHub
 git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
-pushd "$final_path"
-	git reset --hard --quiet $version_commit
-popd
+#git checkout $version_commit
+
+# pushd "$final_path"
+# 	git reset --hard --quiet $version_commit
+# popd
 
 for i in $final_path/config/sql/*.sql ; do
 	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
