@@ -84,10 +84,10 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 ynh_script_progression --message="Creating a PostgreSQL database..." --weight=2
 
 db_name=$(ynh_sanitize_dbid --db_name=$app)
-db_user=$db_name
+db_user="kemal"
 ynh_app_setting_set --app=$app --key=db_name --value=$db_name
 ynh_psql_test_if_first_run
-ynh_psql_setup_db --db_user=$db_name --db_name=$db_name
+ynh_psql_setup_db --db_user=$db_user --db_name=$db_name
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -106,7 +106,6 @@ git clone https://github.com/iv-org/invidious "$final_path" --quiet
 # popd
 
 for i in $final_path/config/sql/*.sql ; do
-	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
 	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
 done
 
