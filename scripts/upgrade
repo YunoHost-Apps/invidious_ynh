@@ -93,10 +93,10 @@ then
 
 	pushd $final_path
 		currentVersion=$(git rev-list --max-count=1 --abbrev-commit HEAD)
+		git reset --hard --quiet
 		git pull
-		#git reset --hard 
 		latestVersion=$(git describe --tags --abbrev=0)
-		git checkout -f $latestVersion
+		git checkout $latestVersion #-f
 		for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
 		ynh_exec_warn_less shards update && shards install
 		ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
