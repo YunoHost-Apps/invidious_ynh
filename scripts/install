@@ -103,7 +103,9 @@ pushd "$final_path"
 	git reset --hard --quiet $version_commit
 popd
 
-ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name
+for i in $final_path/config/sql/*.sql ; do
+	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
+done
 
 chmod 750 "$final_path"
 chmod -R o-rwx "$final_path"
