@@ -92,12 +92,12 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	pushd $final_path
-		currentVersion=$(git rev-list --max-count=1 --abbrev-commit HEAD)
+		#currentVersion=$(git rev-list --max-count=1 --abbrev-commit HEAD)
 		#git reset --hard --quiet
 		git pull
-		latestVersion=$(git describe --tags --abbrev=0)
-		git checkout -f $latestVersion
-		for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
+		#latestVersion=$(git describe --tags --abbrev=0)
+		git checkout -f $version_commit #$latestVersion
+		#for i in `git rev-list --reverse --abbrev-commit $currentVersion..HEAD` ; do file=./config/migrate-scripts/migrate-db-$i.sh ; [ -f $file ] && $file ; done
 		ynh_exec_warn_less shards update && shards install
 		ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
 	popd
