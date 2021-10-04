@@ -126,7 +126,7 @@ ynh_add_nginx_config
 #=================================================
 # INSTALL INVIDIOUS
 #=================================================
-ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
+ynh_script_progression --message="Building Invidious... (this will take some time and resources!)" --weight=60
 
 pushd "$final_path"
 	ynh_exec_warn_less shards update && shards install
