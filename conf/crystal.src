@@ -1,7 +1,0 @@
-SOURCE_URL=https://github.com/crystal-lang/crystal/releases/download/1.0.0/crystal_1.0.0-1_amd64.deb
-SOURCE_SUM=bc4c15bdfb32ae08daef40728fc8a1da260a4defd225f7ba309404d9e77dcd8d
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=deb
-SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=crystal_1.0.0-1_amd64.deb
-SOURCE_EXTRACT=false

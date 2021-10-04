@@ -29,7 +29,7 @@ db:
 ## Accepted values: a postgres:// URI
 ## Default: postgres://kemal:kemal@localhost:5432/invidious
 ##
-#database_url: postgres://kemal:kemal@localhost:5432/invidious
+#database_url: postgres://__DB_USER__:__DB_PWD__@localhost:5432/__DB_NAME__
 
 ##
 ## Enable automatic table integrity check. This will create
