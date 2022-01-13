@@ -1,0 +1,29 @@
+version = "1.0"
+
+[main]
+name = "Invidious configuration"
+services = ["__APP__"]
+
+    [main.config]
+    name = "Configuration Options"
+
+        [main.config.registration_enabled]
+        ask = "Enable registration"
+        type = "boolean"
+        Default= true
+        help = "Allow/Forbid Invidious (local) account creation"
+        bind = "registration_enabled:__FINALPATH__/config/config.yml"
+
+        [main.config.login_enabled]
+        ask = "Enable login"
+        type = "boolean"
+        Default= true
+        help = "Allow/Forbid users to log-in"
+        bind = "login_enabled:__FINALPATH__/config/config.yml"
+
+        [main.config.captcha_enabled]
+        ask = "Enable captcha"
+        type = "boolean"
+        Default= true
+        help = "Enable/Disable the captcha challenge on the login page"
+        bind = "captcha_enabled:__FINALPATH__/config/config.yml"

@@ -252,7 +252,7 @@ hsts: true
 ## Accepted values: true, false
 ## Default: true
 ##
-#registration_enabled: true
+registration_enabled: true
 
 ##
 ## Allow/Forbid users to log-in. This setting affects the ability
@@ -261,7 +261,7 @@ hsts: true
 ## Accepted values: true, false
 ## Default: true
 ##
-#login_enabled: true
+login_enabled: true
 
 ##
 ## Enable/Disable the captcha challenge on the login page.
@@ -272,7 +272,7 @@ hsts: true
 ## Accepted values: true, false
 ## Default: true
 ##
-#captcha_enabled: true
+captcha_enabled: true
 
 ##
 ## List of usernames that will be granted administrator rights.
