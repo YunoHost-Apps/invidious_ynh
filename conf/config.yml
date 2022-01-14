@@ -293,7 +293,7 @@ captcha_enabled: __CAPTCHA_ENABLED__
 ## Accepted values: an array of strings
 ## Default: [""]
 ##
-#admins: [""]
+admins: ["__ADMIN__"]
 
 
 # -----------------------------
