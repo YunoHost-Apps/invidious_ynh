@@ -25,6 +25,10 @@ db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$db_name
 db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 
+registration_enabled=$(ynh_app_setting_get --app=$app --key=registration_enabled)
+login_enabled=$(ynh_app_setting_get --app=$app --key=login_enabled)
+captcha_enabled=$(ynh_app_setting_get --app=$app --key=captcha_enabled)
+
 #=================================================
 # CHECK VERSION
 #=================================================
@@ -58,6 +62,21 @@ ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+if [ -z "$registration_enabled" ]; then
+	registration_enabled="true"
+	ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
+fi
+
+if [ -z "$login_enabled" ]; then
+	login_enabled="true"
+	ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
+fi
+
+if [ -z "$captcha_enabled" ]; then
+	captcha_enabled="true"
+	ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
+fi
 
 # Cleaning legacy permissions
 if ynh_legacy_permissions_exists; then
