@@ -115,7 +115,7 @@ then
     #git checkout master
     git reset --hard --quiet $version_commit
 		git pull
-		ynh_exec_warn_less shards update && shards install
+		ynh_exec_warn_less shards update && shards install --production
 		ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
 	popd
 fi
