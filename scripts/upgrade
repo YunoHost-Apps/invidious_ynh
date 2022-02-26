@@ -25,6 +25,7 @@ language=$(ynh_app_setting_get --app=$app --key=language)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$db_name
 db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
+email=$(ynh_app_setting_get --app=$app --key=email)
 
 registration_enabled=$(ynh_app_setting_get --app=$app --key=registration_enabled)
 login_enabled=$(ynh_app_setting_get --app=$app --key=login_enabled)

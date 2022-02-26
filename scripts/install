@@ -56,6 +56,7 @@ ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=language --value=$language
 ynh_app_setting_set --app=$app --key=admin --value=$admin
+ynh_app_setting_set --app=$app --key=email --value=$email
 ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
 ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
 ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
