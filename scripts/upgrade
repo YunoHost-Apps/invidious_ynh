@@ -131,16 +131,16 @@ chown -R $app:www-data "$final_path"
 #=================================================
 ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Modifying a config file..."
+#ynh_script_progression --message="Modifying a config file..."
 
-ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
-chmod 600 $final_path/config/config.yml
+#ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
+#chmod 600 $final_path/config/config.yml
 
 #=================================================
 # SETUP SYSTEMD
