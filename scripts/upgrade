@@ -19,11 +19,13 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
+admin=$(ynh_app_setting_get --app=$app --key=admin)
 port=$(ynh_app_setting_get --app=$app --key=port)
 language=$(ynh_app_setting_get --app=$app --key=language)
 db_name=$(ynh_app_setting_get --app=$app --key=db_name)
 db_user=$db_name
 db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
+email=$(ynh_app_setting_get --app=$app --key=email)
 
 registration_enabled=$(ynh_app_setting_get --app=$app --key=registration_enabled)
 login_enabled=$(ynh_app_setting_get --app=$app --key=login_enabled)
@@ -129,7 +131,7 @@ chown -R $app:www-data "$final_path"
 #=================================================
 ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
