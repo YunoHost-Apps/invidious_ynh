@@ -9,7 +9,7 @@
 ## This setting is MANDATORY, unless 'database_url' is used.
 ##
 db:
-  user: __DB_NAME__
+  user: __DB_USER__
   password: __DB_PWD__
   host: localhost
   port: 5432
