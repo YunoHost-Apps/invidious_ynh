@@ -146,10 +146,12 @@ popd
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Modifying a config file..."
+ynh_script_progression --message="Modifying a config file..." --weight=1
 
 ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
-chmod 600 $final_path/config/config.yml
+
+chmod 600 "$final_path/config/config.yml"
+chown $app:$app "$final_path/config/config.yml"
 
 #=================================================
 # SETUP SYSTEMD
