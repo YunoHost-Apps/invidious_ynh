@@ -113,10 +113,10 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	pushd $final_path
-		git fetch
+		git fetch --quiet 
     #git checkout master
     git reset --hard --quiet $version_commit
-		git pull
+		git pull --quiet 
 		ynh_exec_warn_less shards install --production
 		ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
 	popd
