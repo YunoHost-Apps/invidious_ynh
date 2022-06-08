@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # Invidious for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Working status](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
 [![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -29,7 +29,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 
 ## Screenshots
 
-![](./doc/screenshots/screenshot.png)
+![Screenshot of Invidious](./doc/screenshots/screenshot.png)
 
 ## Disclaimers / important information
 
@@ -43,21 +43,22 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 
 ## Documentation and resources
 
-* Official user documentation: https://github.com/iv-org/documentation
-* Official admin documentation: https://docs.invidious.io/
-* Upstream app code repository: https://github.com/iv-org/invidious
-* YunoHost documentation for this app: https://yunohost.org/app_invidious
-* Report a bug: https://github.com/YunoHost-Apps/invidious_ynh/issues
+* Official user documentation: <https://github.com/iv-org/documentation>
+* Official admin documentation: <https://docs.invidious.io/>
+* Upstream app code repository: <https://github.com/iv-org/invidious>
+* YunoHost documentation for this app: <https://yunohost.org/app_invidious>
+* Report a bug: <https://github.com/YunoHost-Apps/invidious_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/invidious_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/invidious_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade invidious -u https://github.com/YunoHost-Apps/invidious_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>
