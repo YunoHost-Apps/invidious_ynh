@@ -22,7 +22,6 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to display Reddit comments instead of YouTube comments,
 - Ability to subscribe to channels without creating a Google account 
 
-
 **Shipped version:** 22.08.05~ynh1
 
 **Demo:** https://invidious.site/
