@@ -25,6 +25,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 
 **Shipped version:** 22.08.05~ynh1
 
+
 **Demo:** https://invidious.site/
 
 ## Screenshots
