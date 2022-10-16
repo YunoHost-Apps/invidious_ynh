@@ -23,8 +23,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**Shipped version:** 22.09.10~ynh1
-
+**Shipped version:** 22.10.16~ynh1
 
 **Demo:** https://invidious.site/
 
@@ -41,6 +40,10 @@ You can configure Invidious by modifying the configuration file `/var/www/invidi
 ## Limitations
 
 * Invidious needs more than 2GB of RAM to build.
+
+## :red_circle: Antifeatures
+
+- **Non-free Network Services**: Promotes or depends entirely on a non-free network service.
 
 ## Documentation and resources
 

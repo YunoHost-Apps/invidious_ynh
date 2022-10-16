@@ -22,8 +22,7 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 22.09.10~ynh1
-
+**Version incluse :** 22.10.16~ynh1
 
 **Démo :** https://invidious.site/
 
@@ -40,6 +39,10 @@ Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/
 ## Limitations
 
 * Invidious a besoin de plus de 3Go de RAM pour être installé.
+
+## :red_circle: Fonctions indésirables
+
+- **Non-free Network Services**: Promotes or depends entirely on a non-free network service.
 
 ## Documentations et ressources
 
