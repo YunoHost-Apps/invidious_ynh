@@ -5,15 +5,15 @@ It shall NOT be edited by hand.
 
 # Invidious pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
 [![Installer Invidious avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Invidious rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Invidious rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Invidious est une interface permettant d'accéder aux vidéos Youtube sans passer par youtube.com
 En plus de constituer un avantage sur le plan de la confidentialité (les données ne transitent pas directement par les services du géant), cette interface offre plusieurs fonctionnalités :
@@ -22,13 +22,13 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 23.01.06~ynh1
+**Version incluse :** 23.01.29~ynh1
 
 **Démo :** https://invidious.site/
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Invidious](./doc/screenshots/screenshot.png)
+![Capture d’écran de Invidious](./doc/screenshots/screenshot.png)
 
 ## Avertissements / informations importantes
 
@@ -47,8 +47,8 @@ Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/
 ## Documentations et ressources
 
 * Documentation officielle utilisateur : <https://github.com/iv-org/documentation>
-* Documentation officielle de l'admin : <https://docs.invidious.io/>
-* Dépôt de code officiel de l'app : <https://github.com/iv-org/invidious>
+* Documentation officielle de l’admin : <https://docs.invidious.io/>
+* Dépôt de code officiel de l’app : <https://github.com/iv-org/invidious>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_invidious>
 * Signaler un bug : <https://github.com/YunoHost-Apps/invidious_ynh/issues>
 
@@ -64,4 +64,4 @@ ou
 sudo yunohost app upgrade invidious -u https://github.com/YunoHost-Apps/invidious_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
