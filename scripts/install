@@ -107,6 +107,8 @@ ynh_script_progression --message="Setting up source files..." --weight=4
 
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
+chown -R $app:www-data "$final_path"
+
 # Download, check integrity, uncompress and patch the source from GitHub
 ynh_exec_as $app git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
