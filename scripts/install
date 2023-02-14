@@ -113,6 +113,8 @@ chown -R $app "$final_path"
 # Download, check integrity, uncompress and patch the source from GitHub
 ynh_exec_as $app git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
+ynh_exec_as $app git config --global --add safe.directory
+
 pushd "$final_path"
 	ynh_exec_as $app git reset --hard --quiet $version_commit
 popd
