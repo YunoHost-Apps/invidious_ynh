@@ -6,6 +6,7 @@ It shall NOT be edited by hand.
 # Invidious for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Working status](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
+
 [![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
 *[Lire ce readme en français.](./README_fr.md)*
