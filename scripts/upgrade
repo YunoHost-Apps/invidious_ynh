@@ -113,6 +113,9 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	pushd $final_path
+		chown -R $app:www-data "$final_path"
+		git config --system --add safe.directory $final_path
+		
 		ynh_exec_as $app git fetch
     	#git checkout master
     	ynh_exec_as $app git reset --hard --quiet $version_commit
