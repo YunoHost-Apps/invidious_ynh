@@ -111,14 +111,10 @@ mkdir -p "$final_path"
 chown -R $app:www-data "$final_path"
 
 # Download, check integrity, uncompress and patch the source from GitHub
-#ynh_exec_as $app 
-git clone https://github.com/iv-org/invidious "$final_path" --quiet
-
-#ynh_exec_as $app 
-git config --global --add safe.directory
+ynh_exec_as $app git clone https://github.com/iv-org/invidious "$final_path" --quiet
 
 pushd "$final_path"
-	git reset --hard --quiet $version_commit
+	ynh_exec_as $app git reset --hard --quiet $version_commit
 popd
 
 for i in $final_path/config/sql/*.sql ; do
