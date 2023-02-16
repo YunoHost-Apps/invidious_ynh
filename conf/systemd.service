@@ -7,8 +7,8 @@ After=network.target
 Type=simple
 User=__APP__
 Group=__APP__
-WorkingDirectory=__FINALPATH__
-ExecStart=__FINALPATH__/invidious -o invidious.log
+WorkingDirectory=__INSTALL_DIR__
+ExecStart=__INSTALL_DIR__/invidious -o invidious.log
 RestartSec=2s
 Restart=always
 

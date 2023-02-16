@@ -13,24 +13,24 @@ source /usr/share/yunohost/helpers
 # MANAGE SCRIPT FAILURE
 #=================================================
 
-ynh_clean_setup () {
+#REMOVEME? ynh_clean_setup () {
 	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
-is_public=$YNH_APP_ARG_IS_PUBLIC
-language=$YNH_APP_ARG_LANGUAGE
-admin=$YNH_APP_ARG_ADMIN
+#REMOVEME? domain=$YNH_APP_ARG_DOMAIN
+path="/"
+#REMOVEME? is_public=$YNH_APP_ARG_IS_PUBLIC
+#REMOVEME? language=$YNH_APP_ARG_LANGUAGE
+#REMOVEME? admin=$YNH_APP_ARG_ADMIN
 email=$(ynh_user_get_info --username=$admin --key=mail)
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 
 registration_enabled="true"
 login_enabled="true"
@@ -39,23 +39,23 @@ captcha_enabled="true"
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters..." --weight=1
+#REMOVEME? ynh_script_progression --message="Validating installation parameters..." --weight=1
 
-final_path=/var/www/$app
-test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
+#REMOVEME? install_dir=/var/www/$app
+#REMOVEME? test ! -e "$install_dir" || ynh_die --message="This path already contains a folder"
 
 # Register (book) web path
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+#REMOVEME? ynh_webpath_register --app=$app --domain=$domain --path=$path
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..." --weight=2
+#REMOVEME? ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain --value=$domain
-ynh_app_setting_set --app=$app --key=path --value=$path_url
+#REMOVEME? ynh_app_setting_set --app=$app --key=domain --value=$domain
+#REMOVEME? ynh_app_setting_set --app=$app --key=path --value=$path
 ynh_app_setting_set --app=$app --key=language --value=$language
-ynh_app_setting_set --app=$app --key=admin --value=$admin
+#REMOVEME? ynh_app_setting_set --app=$app --key=admin --value=$admin
 ynh_app_setting_set --app=$app --key=email --value=$email
 ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
 ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
@@ -66,67 +66,67 @@ ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
-ynh_script_progression --message="Finding an available port..." --weight=0
+#REMOVEME? ynh_script_progression --message="Finding an available port..." --weight=0
 
 # Find an available port
-port=$(ynh_find_port --port=3000)
-ynh_app_setting_set --app=$app --key=port --value=$port
+#REMOVEME? port=$(ynh_find_port --port=3000)
+#REMOVEME? ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=15
+#REMOVEME? ynh_script_progression --message="Installing dependencies..." --weight=15
 
-ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+#REMOVEME? ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
+#REMOVEME? ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
-ynh_system_user_create --username=$app --home_dir="$final_path"
+#REMOVEME? ynh_system_user_create --username=$app --home_dir="$install_dir"
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
 #=================================================
-ynh_script_progression --message="Creating a PostgreSQL database..." --weight=2
+#REMOVEME? ynh_script_progression --message="Creating a PostgreSQL database..." --weight=2
 
-db_name=$(ynh_sanitize_dbid --db_name=$app)
-db_user=$db_name
-ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-ynh_psql_test_if_first_run
-ynh_psql_setup_db --db_user=$db_user --db_name=$db_name
+#REMOVEME? db_name=$(ynh_sanitize_dbid --db_name=$app)
+#REMOVEME? db_user=$db_name
+#REMOVEME? ynh_app_setting_set --app=$app --key=db_name --value=$db_name
+#REMOVEME? ynh_psql_test_if_first_run
+#REMOVEME? ynh_psql_setup_db --db_user=$db_user --db_name=$db_name
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-ynh_app_setting_set --app=$app --key=final_path --value=$final_path
+#REMOVEME? ynh_app_setting_set --app=$app --key=install_dir --value=$install_dir
 
-mkdir -p "$final_path"
-chown -R $app:www-data "$final_path"
+mkdir -p "$install_dir"
+chown -R $app:www-data "$install_dir"
 
-git config --system --add safe.directory $final_path
+git config --system --add safe.directory $install_dir
 
 # Download, check integrity, uncompress and patch the source from GitHub
-ynh_exec_as $app git clone https://github.com/iv-org/invidious "$final_path" --quiet
+ynh_exec_as $app git clone https://github.com/iv-org/invidious "$install_dir" --quiet
 
-pushd "$final_path"
+pushd "$install_dir"
 	ynh_exec_as $app git reset --hard --quiet $version_commit
 popd
 
-for i in $final_path/config/sql/*.sql ; do
+for i in $install_dir/config/sql/*.sql ; do
 	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
 	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
 done
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -143,9 +143,9 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
 
-pushd "$final_path"
+pushd "$install_dir"
 	ynh_exec_warn_less shards install --production
-	ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
+	ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
 popd
 
 #=================================================
@@ -153,10 +153,10 @@ popd
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=1
 
-ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
+ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
 
-chmod 600 "$final_path/config/config.yml"
-chown $app:$app "$final_path/config/config.yml"
+chmod 600 "$install_dir/config/config.yml"
+chown $app:$app "$install_dir/config/config.yml"
 
 #=================================================
 # SETUP SYSTEMD
@@ -200,22 +200,22 @@ ynh_systemd_action --service_name=$app --action=start --log_path=systemd
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring permissions..." --weight=1
+#REMOVEME? ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary or protect it
-if [ $is_public -eq 1 ]
+#REMOVEME? if [ $is_public -eq 1 ]
 then
-	ynh_permission_update --permission="main" --add="visitors"
+#REMOVEME? 	ynh_permission_update --permission="main" --add="visitors"
 fi
 
-ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
+#REMOVEME? ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
 
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=2
+#REMOVEME? ynh_script_progression --message="Reloading NGINX web server..." --weight=2
 
-ynh_systemd_action --service_name=nginx --action=reload
+#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT

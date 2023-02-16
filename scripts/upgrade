@@ -12,24 +12,24 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=2
+#REMOVEME? ynh_script_progression --message="Loading installation settings..." --weight=2
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-admin=$(ynh_app_setting_get --app=$app --key=admin)
-port=$(ynh_app_setting_get --app=$app --key=port)
-language=$(ynh_app_setting_get --app=$app --key=language)
-db_name=$(ynh_app_setting_get --app=$app --key=db_name)
-db_user=$db_name
-db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
-email=$(ynh_app_setting_get --app=$app --key=email)
+#REMOVEME? domain=$(ynh_app_setting_get --app=$app --key=domain)
+#REMOVEME? path=$(ynh_app_setting_get --app=$app --key=path)
+#REMOVEME? #REMOVEME? install_dir=$(ynh_app_setting_get --app=$app --key=install_dir)
+#REMOVEME? admin=$(ynh_app_setting_get --app=$app --key=admin)
+#REMOVEME? port=$(ynh_app_setting_get --app=$app --key=port)
+#REMOVEME? language=$(ynh_app_setting_get --app=$app --key=language)
+#REMOVEME? db_name=$(ynh_app_setting_get --app=$app --key=db_name)
+#REMOVEME? db_user=$db_name
+#REMOVEME? db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
+#REMOVEME? email=$(ynh_app_setting_get --app=$app --key=email)
 
-registration_enabled=$(ynh_app_setting_get --app=$app --key=registration_enabled)
-login_enabled=$(ynh_app_setting_get --app=$app --key=login_enabled)
-captcha_enabled=$(ynh_app_setting_get --app=$app --key=captcha_enabled)
+#REMOVEME? registration_enabled=$(ynh_app_setting_get --app=$app --key=registration_enabled)
+#REMOVEME? login_enabled=$(ynh_app_setting_get --app=$app --key=login_enabled)
+#REMOVEME? captcha_enabled=$(ynh_app_setting_get --app=$app --key=captcha_enabled)
 
 #=================================================
 # CHECK VERSION
@@ -43,13 +43,13 @@ upgrade_type=$(ynh_check_app_version_changed)
 ynh_script_progression --message="Backing up Invidious before upgrading..." --weight=4
 
 # Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
+#REMOVEME? ynh_backup_before_upgrade
+#REMOVEME? ynh_clean_setup () {
 	# restore it if the upgrade fails
-	ynh_restore_upgradebackup
+#REMOVEME? 	ynh_restore_upgradebackup
 }
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -81,8 +81,8 @@ if [ -z "$captcha_enabled" ]; then
 fi
 
 # Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
+#REMOVEME? if ynh_legacy_permissions_exists; then
+#REMOVEME? 	ynh_legacy_permissions_delete_all
 
 	ynh_app_setting_delete --app=$app --key=is_public
 fi
@@ -90,17 +90,17 @@ fi
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+#REMOVEME? ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
 
 # Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
+#REMOVEME? ynh_system_user_create --username=$app --home_dir="$install_dir"
 
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=8
+#REMOVEME? ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
-ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
+#REMOVEME? ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
 
@@ -112,22 +112,22 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-	pushd $final_path
-		chown -R $app:www-data "$final_path"
-		git config --system --add safe.directory $final_path
+	pushd $install_dir
+		chown -R $app:www-data "$install_dir"
+		git config --system --add safe.directory $install_dir
 		
 		ynh_exec_as $app git fetch
     	#git checkout master
     	ynh_exec_as $app git reset --hard --quiet $version_commit
 		ynh_exec_as $app git pull
 		ynh_exec_warn_less shards install --production
-		ynh_exec_warn_less crystal build $final_path/src/invidious.cr --release
+		ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
 	popd
 fi
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -142,8 +142,8 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Modifying a config file..."
 
-ynh_add_config --template="../conf/config.yml" --destination="$final_path/config/config.yml"
-chmod 600 $final_path/config/config.yml
+ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
+chmod 600 $install_dir/config/config.yml
 
 #=================================================
 # SETUP SYSTEMD
@@ -189,9 +189,9 @@ ynh_systemd_action --service_name=$app --action=restart --log_path=systemd
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
+#REMOVEME? ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
-ynh_systemd_action --service_name=nginx --action=reload
+#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
