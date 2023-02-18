@@ -84,6 +84,21 @@ pushd "$install_dir"
 popd
 
 #=================================================
+# SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding system configurations related to $app ..." --weight=10
+
+ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
+chown root: "/etc/cron.d/$app"
+chmod 644 "/etc/cron.d/$app"
+
+ynh_use_logrotate
+
+ynh_add_systemd_config
+
+yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
+
+#=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=1
@@ -92,37 +107,6 @@ ynh_add_config --template="../conf/config.yml" --destination="$install_dir/confi
 
 chmod 600 "$install_dir/config/config.yml"
 chown $app:$app "$install_dir/config/config.yml"
-
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
-
-ynh_add_systemd_config
-
-#=================================================
-# SETUP CRON
-#=================================================
-ynh_script_progression --message="Setuping a cron..." --weight=1
-
-ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
-chown root: "/etc/cron.d/$app"
-chmod 644 "/etc/cron.d/$app"
-
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Configuring log rotation..." --weight=1
-
-# Use logrotate to manage application logfile(s)
-ynh_use_logrotate
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
-
-yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE

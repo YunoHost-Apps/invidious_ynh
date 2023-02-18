@@ -87,12 +87,22 @@ chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
 #=================================================
-# NGINX CONFIGURATION
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
+ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
+
+ynh_add_systemd_config
+
+ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
+chown root: "/etc/cron.d/$app"
+chmod 644 "/etc/cron.d/$app"
+
+ynh_use_logrotate --non-append
+
+yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # MODIFY A CONFIG FILE
@@ -101,40 +111,6 @@ ynh_script_progression --message="Modifying a config file..."
 
 ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
 chmod 600 $install_dir/config/config.yml
-
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=2
-
-# Create a dedicated systemd config
-ynh_add_systemd_config
-
-#=================================================
-# SETUP CRON
-#=================================================
-ynh_script_progression --message="Setuping a cron..." --weight=1
-
-ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
-chown root: "/etc/cron.d/$app"
-chmod 644 "/etc/cron.d/$app"
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Upgrading logrotate configuration..." --weight=1
-
-# Use logrotate to manage app-specific logfile(s)
-ynh_use_logrotate --non-append
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=3
-
-yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
