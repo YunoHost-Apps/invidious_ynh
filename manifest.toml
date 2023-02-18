@@ -18,7 +18,7 @@ code = "https://github.com/iv-org/invidious"
 website = "https://invidio.us/"
 
 [integration]
-yunohost = ">= 11.0.9"
+yunohost = ">= 11.1.7"
 architectures = ["amd64"]
 multi_instance = false
 ldap = false
