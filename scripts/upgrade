@@ -10,16 +10,6 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# LOAD SETTINGS
-#=================================================
-#REMOVEME? ynh_script_progression --message="Loading installation settings..." --weight=2
-
-#REMOVEME? email=$(ynh_app_setting_get --app=$app --key=email)
-#REMOVEME? registration_enabled=$(ynh_app_setting_get --app=$app --key=registration_enabled)
-#REMOVEME? login_enabled=$(ynh_app_setting_get --app=$app --key=login_enabled)
-#REMOVEME? captcha_enabled=$(ynh_app_setting_get --app=$app --key=captcha_enabled)
-
-#=================================================
 # CHECK VERSION
 #=================================================
 
