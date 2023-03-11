@@ -59,7 +59,6 @@ for i in $install_dir/config/sql/*.sql ; do
 	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
 done
 
-chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
