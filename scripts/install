@@ -45,11 +45,6 @@ chown -R $app:www-data "$install_dir"
 
 git config --system --add safe.directory $install_dir
 
-mkdir -p "$final_path"
-chown -R $app:www-data "$final_path"
-
-git config --system --add safe.directory $final_path
-
 # Download, check integrity, uncompress and patch the source from GitHub
 #ynh_exec_as $app 
 git clone https://github.com/iv-org/invidious "$install_dir" --quiet
