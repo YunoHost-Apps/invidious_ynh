@@ -17,7 +17,10 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 ## Overview
 
 Invidious is an interface allowing access to Youtube videos without going through youtube.com
-In addition to constituting an advantage in terms of confidentiality (the data does not pass directly through the services of the giant), this interface offers several features:
+In addition to constituting an advantage in terms of confidentiality (the data does not pass directly through the services of the giant).
+
+### Features:
+
 - Audio only mode,
 - Dark mode,
 - Ability to display Reddit comments instead of YouTube comments,
@@ -32,22 +35,13 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 
 ![Screenshot of Invidious](./doc/screenshots/screenshot.png)
 
-## Disclaimers / important information
-
-## Configuration
-
-You can configure Invidious by modifying the configuration file `/var/www/invidious/config/config.yml` with the help of this [documentation](https://docs.invidious.io/Configuration.md).
-
-## Limitations
-
-* Invidious needs more than 2GB of RAM to build.
-
 ## :red_circle: Antifeatures
 
 - **Non-free Network Services**: Promotes or depends entirely on a non-free network service.
 
 ## Documentation and resources
 
+* Official app website: <https://invidio.us/>
 * Official user documentation: <https://github.com/iv-org/documentation>
 * Official admin documentation: <https://docs.invidious.io/>
 * Upstream app code repository: <https://github.com/iv-org/invidious>
