@@ -17,7 +17,9 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 ## Vue d’ensemble
 
 Invidious est une interface permettant d'accéder aux vidéos Youtube sans passer par youtube.com
-En plus de constituer un avantage sur le plan de la confidentialité (les données ne transitent pas directement par les services du géant), cette interface offre plusieurs fonctionnalités :
+En plus de constituer un avantage sur le plan de la confidentialité (les données ne transitent pas directement par les services du géant).
+
+### Fonctionnalités :
 - Mode audio seul,
 - Mode sombre,
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
@@ -31,22 +33,13 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 
 ![Capture d’écran de Invidious](./doc/screenshots/screenshot.png)
 
-## Avertissements / informations importantes
-
-## Configuration
-
-Vous pouvez configurer Invidious en modifiant le fichier de configuration `/var/www/invidious/config/config.yaml` avec l'aide de cette [documentation](https://docs.invidious.io/Configuration.md).
-
-## Limitations
-
-* Invidious a besoin de plus de 3Go de RAM pour être installé.
-
 ## :red_circle: Fonctions indésirables
 
 - **Non-free Network Services**: Promotes or depends entirely on a non-free network service.
 
 ## Documentations et ressources
 
+* Site officiel de l’app : <https://invidio.us/>
 * Documentation officielle utilisateur : <https://github.com/iv-org/documentation>
 * Documentation officielle de l’admin : <https://docs.invidious.io/>
 * Dépôt de code officiel de l’app : <https://github.com/iv-org/invidious>
