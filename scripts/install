@@ -23,6 +23,7 @@ captcha_enabled="true"
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
+ynh_app_setting_set --app=$app --key=key --value=$key
 ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
 ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
 ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
