@@ -65,5 +65,9 @@ ram.runtime = "50M"
     [resources.apt]
     packages = "dialog apt-utils libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev postgresql librsvg2-bin imagemagick libsqlite3-dev zlib1g-dev libevent-dev libpcre3-dev"
 
+    extras.crystal.repo = "deb http://download.opensuse.org/repositories/devel:/languages:/crystal/Debian_11/ /"
+    extras.crystal.key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    extras.crystal.packages = "crystal"
+
     [resources.database]
     type = "postgresql"
