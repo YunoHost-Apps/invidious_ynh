@@ -27,7 +27,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**Shipped version:** 04.05.23~ynh1
+**Shipped version:** 20.05.23~ynh1
 
 **Demo:** https://invidious.site/
 
@@ -42,7 +42,6 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 ## Documentation and resources
 
 * Official app website: <https://invidio.us/>
-* Official user documentation: <https://github.com/iv-org/documentation>
 * Official admin documentation: <https://docs.invidious.io/>
 * Upstream app code repository: <https://github.com/iv-org/invidious>
 * YunoHost documentation for this app: <https://yunohost.org/app_invidious>

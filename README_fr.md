@@ -20,12 +20,13 @@ Invidious est une interface permettant d'accéder aux vidéos Youtube sans passe
 En plus de constituer un avantage sur le plan de la confidentialité (les données ne transitent pas directement par les services du géant).
 
 ### Fonctionnalités :
+
 - Mode audio seul,
 - Mode sombre,
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 04.05.23~ynh1
+**Version incluse :** 20.05.23~ynh1
 
 **Démo :** https://invidious.site/
 
@@ -40,7 +41,6 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 ## Documentations et ressources
 
 * Site officiel de l’app : <https://invidio.us/>
-* Documentation officielle utilisateur : <https://github.com/iv-org/documentation>
 * Documentation officielle de l’admin : <https://docs.invidious.io/>
 * Dépôt de code officiel de l’app : <https://github.com/iv-org/invidious>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_invidious>
