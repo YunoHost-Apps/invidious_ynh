@@ -13,6 +13,7 @@ source /usr/share/yunohost/helpers
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
+key=$(ynh_string_random --length=24)
 email=$(ynh_user_get_info --username=$admin --key=mail)
 registration_enabled="true"
 login_enabled="true"
