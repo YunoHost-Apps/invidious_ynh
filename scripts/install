@@ -54,11 +54,6 @@ pushd "$install_dir"
 	make
 popd
 
-#for i in $install_dir/config/sql/*.sql ; do
-#	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
-#	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
-#done
-
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
