@@ -52,14 +52,17 @@ pushd "$install_dir"
 	git reset --hard --quiet $version_commit
 popd
 
-for i in $install_dir/config/sql/*.sql ; do
-	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
-	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
-done
+#for i in $install_dir/config/sql/*.sql ; do
+#	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
+#	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
+#done
 
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
+pushd "$install_dir"
+	make
+popd
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
@@ -69,6 +72,20 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=3
 ynh_add_nginx_config
 
 #=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+ynh_script_progression --message="Modifying a config file..." --weight=1
+
+ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
+
+chmod 600 "$install_dir/config/config.yml"
+chown $app:$app "$install_dir/config/config.yml"
+
+pushd "$install_dir"
+	./invidious --migrate
+popd
+
+#=================================================
 # SPECIFIC SETUP
 #=================================================
 # INSTALL INVIDIOUS
@@ -76,7 +93,7 @@ ynh_add_nginx_config
 ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
 
 pushd "$install_dir"
-	ynh_exec_warn_less shards install --production
+	#ynh_exec_warn_less shards install --production
 	ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
 popd
 
@@ -94,16 +111,6 @@ ynh_use_logrotate
 ynh_add_systemd_config
 
 yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-ynh_script_progression --message="Modifying a config file..." --weight=1
-
-ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
-
-chmod 600 "$install_dir/config/config.yml"
-chown $app:$app "$install_dir/config/config.yml"
 
 #=================================================
 # START SYSTEMD SERVICE
