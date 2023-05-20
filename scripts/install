@@ -34,7 +34,7 @@ ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=15
 
-ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
+ynh_exec_warn_less DEBIAN_FRONTEND=noninteractive curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
