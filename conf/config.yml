@@ -295,9 +295,6 @@ captcha_enabled: __CAPTCHA_ENABLED__
 ##
 admins: ["__ADMIN__"]
 
-## Email provided to users for bug reports
-admin_email: __EMAIL__
-
 ##
 ## Enable/Disable the user notifications for all users
 ##
@@ -780,7 +777,7 @@ default_user_preferences:
   ## Accepted values: dash, hd720, medium, small
   ## Default: hd720
   ##
-  quality: hd720
+  quality: dash
 
   ##
   ## Default dash video quality.

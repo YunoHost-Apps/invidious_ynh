@@ -14,7 +14,6 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 key=$(ynh_string_random --length=24)
-email=$(ynh_user_get_info --username=$admin --key=mail)
 registration_enabled="true"
 login_enabled="true"
 captcha_enabled="true"
@@ -24,7 +23,6 @@ captcha_enabled="true"
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=email --value=$email
 ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
 ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
 ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
