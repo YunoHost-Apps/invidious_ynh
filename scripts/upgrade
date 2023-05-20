@@ -96,10 +96,10 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-#ynh_script_progression --message="Modifying a config file..."
+ynh_script_progression --message="Modifying a config file..."
 
-#ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
-#chmod 600 $install_dir/config/config.yml
+ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
+chmod 600 $install_dir/config/config.yml
 
 #=================================================
 # START SYSTEMD SERVICE
