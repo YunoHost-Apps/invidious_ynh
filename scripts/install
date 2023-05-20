@@ -77,7 +77,7 @@ ynh_script_progression --message="Building Invidious.. (this will take some time
 
 pushd "$install_dir"
 	ynh_exec_warn_less shards install --production
-	ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
+	ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --Ddisable_quic --release
 popd
 
 #=================================================
