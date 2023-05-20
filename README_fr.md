@@ -20,12 +20,13 @@ Invidious est une interface permettant d'accéder aux vidéos Youtube sans passe
 En plus de constituer un avantage sur le plan de la confidentialité (les données ne transitent pas directement par les services du géant).
 
 ### Fonctionnalités :
+
 - Mode audio seul,
 - Mode sombre,
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 04.05.23~ynh1
+**Version incluse :** 20.05.23~ynh1
 
 **Démo :** https://invidious.site/
 

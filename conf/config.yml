@@ -465,7 +465,7 @@ jobs:
 ## Accepted values: a string
 ## Default: <none>
 ##
-#hmac_key:
+hmac_key: __KEY__
 
 ##
 ## List of video IDs where the "download" widget must be

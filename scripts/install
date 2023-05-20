@@ -13,6 +13,7 @@ source /usr/share/yunohost/helpers
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
+key=$(ynh_string_random --length=24)
 email=$(ynh_user_get_info --username=$admin --key=mail)
 registration_enabled="true"
 login_enabled="true"
@@ -50,51 +51,11 @@ git clone https://github.com/iv-org/invidious "$install_dir" --quiet
 
 pushd "$install_dir"
 	git reset --hard --quiet $version_commit
+	make
 popd
-
-for i in $install_dir/config/sql/*.sql ; do
-	ynh_replace_string --match_string="kemal" --replace_string=$db_user --target_file="$i" ;
-	ynh_psql_connect_as --user=$db_user --password=$db_pwd --database=$db_name < "$i" ;
-done
 
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Configuring NGINX web server..." --weight=3
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
-
-#=================================================
-# SPECIFIC SETUP
-#=================================================
-# INSTALL INVIDIOUS
-#=================================================
-ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
-
-pushd "$install_dir"
-	ynh_exec_warn_less shards install --production
-	ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
-	#ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --Ddisable_quic --release
-popd
-
-#=================================================
-# SYSTEM CONFIGURATION
-#=================================================
-ynh_script_progression --message="Adding system configurations related to $app ..." --weight=10
-
-ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
-chown root: "/etc/cron.d/$app"
-chmod 644 "/etc/cron.d/$app"
-
-ynh_use_logrotate
-
-ynh_add_systemd_config
-
-yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # MODIFY A CONFIG FILE
@@ -105,6 +66,38 @@ ynh_add_config --template="../conf/config.yml" --destination="$install_dir/confi
 
 chmod 600 "$install_dir/config/config.yml"
 chown $app:$app "$install_dir/config/config.yml"
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+# INSTALL INVIDIOUS
+#=================================================
+ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
+
+pushd "$install_dir"
+	./invidious --migrate
+	ynh_exec_warn_less shards install --production
+	ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
+	#ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --Ddisable_quic --release
+popd
+
+#=================================================
+# SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding system configurations related to $app ..." --weight=10
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config
+
+ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
+chown root: "/etc/cron.d/$app"
+chmod 644 "/etc/cron.d/$app"
+
+ynh_use_logrotate
+
+ynh_add_systemd_config
+
+yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
