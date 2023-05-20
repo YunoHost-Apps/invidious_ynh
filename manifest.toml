@@ -13,7 +13,6 @@ maintainers = ["eric_G"]
 license = "GPL-3.0-only"
 demo = "https://invidious.site/"
 admindoc = "https://docs.invidious.io/"
-userdoc = "https://github.com/iv-org/documentation"
 code = "https://github.com/iv-org/invidious"
 website = "https://invidio.us/"
 
