@@ -42,7 +42,6 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 ## Documentation and resources
 
 * Official app website: <https://invidio.us/>
-* Official user documentation: <https://github.com/iv-org/documentation>
 * Official admin documentation: <https://docs.invidious.io/>
 * Upstream app code repository: <https://github.com/iv-org/invidious>
 * YunoHost documentation for this app: <https://yunohost.org/app_invidious>
