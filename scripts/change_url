@@ -19,6 +19,15 @@ ynh_script_progression --message="Stopping a systemd service..." --weight=1
 ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
 
 #=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+ynh_script_progression --message="Modifying a config file..."
+
+ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
+chmod 600 $install_dir/config/config.yml
+chown $app:$app "$install_dir/config/config.yml"
+
+#=================================================
 # MODIFY URL IN NGINX CONF
 #=================================================
 ynh_script_progression --message="Updating NGINX web server configuration..." --weight=2
