@@ -84,7 +84,7 @@ external_port: 443
 ## Accepted values: a valid IPv4 or IPv6 address.
 ## default: 0.0.0.0  (listen on all interfaces)
 ##
-host_binding: 0.0.0.0
+host_binding: 127.0.0.1
 
 ##
 ## Domain name under which this instance is hosted. This is
