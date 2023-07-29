@@ -42,6 +42,10 @@ ynh_script_progression --message="Setting up source files..." --weight=4
 
 ynh_setup_source --dest_dir="$install_dir"
 
+pushd "$install_dir"
+	make
+popd
+
 chown -R $app:www-data "$install_dir"
 
 #=================================================

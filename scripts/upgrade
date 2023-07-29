@@ -65,6 +65,10 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
 	ynh_setup_source --dest_dir="$install_dir" --full_replace=1
+
+	pushd "$install_dir"
+		make
+	popd
 fi
 
 chown -R $app:www-data "$install_dir"
