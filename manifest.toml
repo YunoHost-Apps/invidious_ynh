@@ -48,6 +48,12 @@ ram.runtime = "50M"
     default = "fr"
 
 [resources]
+    [resources.sources]
+        [resources.sources.main]
+        url = "https://github.com/iv-org/invidious/archive/d956b1826e15da6cfcd9a1531b0f1e6ef577dd10.tar.gz"
+        sha256 = "d5478d5c9e473998594c58eafa01c74dcfa9bdf3eebea4250afa1443c47481c1"
+        autoupdate.strategy = "latest_github_commit"
+
     [resources.system_user]
 
     [resources.install_dir]

@@ -64,20 +64,9 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-	pushd $install_dir
-		chown -R $app:www-data "$install_dir"
-		git config --system --add safe.directory $install_dir
-		
-		ynh_exec_as $app git fetch
-    	#git checkout master
-    	ynh_exec_as $app git reset --hard --quiet $version_commit
-		ynh_exec_as $app git pull
-		ynh_exec_warn_less shards install --production
-		ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
-	popd
+	ynh_setup_source --dest_dir="$install_dir" --full_replace=1
 fi
 
-chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
 #=================================================
@@ -105,6 +94,7 @@ ynh_script_progression --message="Modifying a config file..."
 
 ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
 chmod 600 $install_dir/config/config.yml
+chown $app:$app "$install_dir/config/config.yml"
 
 #=================================================
 # START SYSTEMD SERVICE

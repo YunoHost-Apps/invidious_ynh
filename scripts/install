@@ -40,20 +40,8 @@ ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- -
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-mkdir -p "$install_dir"
-chown -R $app:www-data "$install_dir"
+ynh_setup_source --dest_dir="$install_dir"
 
-git config --system --add safe.directory $install_dir
-
-# Download, check integrity, uncompress and patch the source from GitHub
-git clone https://github.com/iv-org/invidious "$install_dir" --quiet
-
-pushd "$install_dir"
-	git reset --hard --quiet $version_commit
-	make
-popd
-
-chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
 #=================================================
