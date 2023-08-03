@@ -5,7 +5,7 @@ name = "Invidious"
 description.en = "Alternative front-end to YouTube"
 description.fr = "Front-end alternatif à YouTube"
 
-version = "12.06.23~ynh1"
+version = "02.08.23~ynh1"
 
 maintainers = ["eric_G"]
 
@@ -17,7 +17,7 @@ code = "https://github.com/iv-org/invidious"
 website = "https://invidio.us/"
 
 [integration]
-yunohost = ">= 11.1.20"
+yunohost = ">= 11.2"
 architectures = ["amd64"]
 multi_instance = false
 ldap = false
@@ -43,7 +43,7 @@ ram.runtime = "50M"
     [install.language]
     ask.en = "Choose the application language"
     ask.fr = "Choisissez la langue de l'application"
-    type = "string"
+    type = "select"
     choices = ["de", "en-US", "es", "fr", "it", "nl", "pt-PT"]
     default = "fr"
 
