@@ -4,7 +4,7 @@
 # COMMON VARIABLES
 #=================================================
 
-version_commit=34508966027fce3f460d9670eeecef67b92565a0
+version_commit=ac0c0609bb8b652e630c3603cd9dbb1c87fbdf44
 
 #=================================================
 # PERSONAL HELPERS
