@@ -65,7 +65,7 @@ ram.runtime = "50M"
     vi.protected = true
 
     [resources.apt]
-    packages = "libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev postgresql librsvg2-bin imagemagick libsqlite3-dev zlib1g-dev libevent-dev libpcre3-dev"
+    packages = "postgresql libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev librsvg2-bin imagemagick libsqlite3-dev zlib1g-dev libevent-dev libpcre3-dev"
 
     [resources.database]
     type = "postgresql"
