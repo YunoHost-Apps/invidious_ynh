@@ -34,8 +34,6 @@ ram.runtime = "50M"
     type = "user"
 
     [install.init_main_permission]
-    help.en = "If enabled, Invidious will be accessible by people who do not have an account. This can be changed later via the webadmin."
-    help.fr = "Si cette case est cochée, Invidious sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
     type = "group"
     default = "visitors"
 
