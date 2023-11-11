@@ -43,6 +43,7 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 * Site officiel de l’app : <https://invidio.us/>
 * Documentation officielle de l’admin : <https://docs.invidious.io/>
 * Dépôt de code officiel de l’app : <https://github.com/iv-org/invidious>
+* YunoHost Store: <https://apps.yunohost.org/app/invidious>
 * Signaler un bug : <https://github.com/YunoHost-Apps/invidious_ynh/issues>
 
 ## Informations pour les développeurs
