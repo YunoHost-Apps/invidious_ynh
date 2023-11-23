@@ -5,23 +5,26 @@ name = "Invidious"
 description.en = "Alternative front-end to YouTube"
 description.fr = "Front-end alternatif à YouTube"
 
-version = "23.10.23~ynh1"
+version = "23.11.11~ynh1"
 
 maintainers = ["eric_G"]
 
 [upstream]
 license = "GPL-3.0-only"
+website = "https://invidio.us/"
 demo = "https://invidious.site/"
 admindoc = "https://docs.invidious.io/"
 code = "https://github.com/iv-org/invidious"
-website = "https://invidio.us/"
 
 [integration]
 yunohost = ">= 11.2"
 architectures = ["amd64"]
 multi_instance = false
+
 ldap = false
+
 sso = false
+
 disk = "50M"
 ram.build = "2G"
 ram.runtime = "50M"
