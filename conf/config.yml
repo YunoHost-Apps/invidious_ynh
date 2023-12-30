@@ -216,7 +216,7 @@ hsts: true
 ## Accepted values: true, false
 ## Default: true
 ##
-popular_enabled: __POPULAR_ENABLED__
+# popular_enabled: true
 
 ##
 ## Enable/Disable statstics (available at /api/v1/stats).
