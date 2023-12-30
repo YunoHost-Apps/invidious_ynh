@@ -305,7 +305,7 @@ admins: ["__ADMIN__"]
 ## Accepted values: true, false
 ## Default: true
 ##
-enable_user_notifications: __ENABLE_USER_NOTIFICATION__
+enable_user_notifications: __ENABLE_USER_NOTIFICATIONS__
 
 # -----------------------------
 #  Background jobs
