@@ -17,16 +17,20 @@ key=$(ynh_string_random --length=24)
 registration_enabled="true"
 login_enabled="true"
 captcha_enabled="true"
+enable_user_notifications="true"
+banner=""
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=key --value=$key
-ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
-ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
-ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
+ynh_app_setting_set --app="$app" --key=key --value="$key"
+ynh_app_setting_set --app="$app" --key=registration_enabled --value=$registration_enabled
+ynh_app_setting_set --app="$app" --key=login_enabled --value=$login_enabled
+ynh_app_setting_set --app="$app" --key=captcha_enabled --value=$captcha_enabled
+ynh_app_setting_set --app="$app" --key=enable_user_notifications --value=$enable_user_notifications
+ynh_app_setting_set --app="$app" --key=banner --value="$banner"
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -41,20 +45,20 @@ ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- -
 ynh_script_progression --message="Setting up source files..." --weight=4
 
 mkdir -p "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
-git config --system --add safe.directory $install_dir
+git config --system --add safe.directory "$install_dir"
 
 # Download, check integrity, uncompress and patch the source from GitHub
 git clone https://github.com/iv-org/invidious "$install_dir" --quiet
 
 pushd "$install_dir"
-	git reset --hard --quiet $version_commit
+	git reset --hard --quiet "$version_commit"
 	make
 popd
 
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # MODIFY A CONFIG FILE
@@ -64,7 +68,7 @@ ynh_script_progression --message="Modifying a config file..." --weight=1
 ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
 
 chmod 600 "$install_dir/config/config.yml"
-chown $app:$app "$install_dir/config/config.yml"
+chown "$app:$app" "$install_dir/config/config.yml"
 
 #=================================================
 # SPECIFIC SETUP
@@ -93,7 +97,7 @@ ynh_use_logrotate
 
 ynh_add_systemd_config
 
-yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -101,7 +105,7 @@ yunohost service add $app --description="Invidious is an alternative front-end t
 ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action=start --log_path=systemd
+ynh_systemd_action --service_name="$app" --action=start --log_path=systemd
 
 #=================================================
 # END OF SCRIPT
