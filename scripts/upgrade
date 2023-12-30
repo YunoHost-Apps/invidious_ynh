@@ -83,7 +83,7 @@ then
     	ynh_exec_as "$app" git reset --hard --quiet "$version_commit"
 		ynh_exec_as "$app" git pull
 		ynh_exec_warn_less shards install --production
-		ynh_exec_warn_less crystal build "$install_dir/src/invidious.c"r --release
+		ynh_exec_warn_less crystal build "$install_dir/src/invidious.cr" --release
 	popd
 fi
 
