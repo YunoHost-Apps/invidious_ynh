@@ -4,29 +4,48 @@ version = "1.0"
 name = "Invidious configuration"
 services = ["__APP__"]
 
-    [main.config]
-    name = "Configuration Options"
 
-        [main.config.registration_enabled]
-        ask = "Enable registration"
-        type = "boolean"
-        yes = "true"
-		no = "false"
-        help = "Allow/Forbid Invidious (local) account creation"
-        bind = "registration_enabled:__INSTALL_DIR__/config/config.yml"
+[main.users_accounts]
+name = "Users and accounts configuration"
 
-        [main.config.login_enabled]
-        ask = "Enable login"
-        type = "boolean"
-        yes = "true"
-		no = "false"
-        help = "Allow/Forbid users to log-in"
-        bind = "login_enabled:__INSTALL_DIR__/config/config.yml"
+[main.users_accounts.registration_enabled]
+ask = "Enable registration"
+type = "boolean"
+yes = "true"
+no = "false"
+help = "Allow/Forbid Invidious (local) account creation"
+bind = "registration_enabled:__INSTALL_DIR__/config/config.yml"
 
-        [main.config.captcha_enabled]
-        ask = "Enable captcha"
-        type = "boolean"
-        yes = "true"
-		no = "false"
-        help = "Enable/Disable the captcha challenge on the login page"
-        bind = "captcha_enabled:__INSTALL_DIR__/config/config.yml"
+[main.users_accounts.login_enabled]
+ask = "Enable login"
+type = "boolean"
+yes = "true"
+no = "false"
+help = "Allow/Forbid users to log-in"
+bind = "login_enabled:__INSTALL_DIR__/config/config.yml"
+
+[main.users_accounts.captcha_enabled]
+ask = "Enable captcha"
+type = "boolean"
+yes = "true"
+no = "false"
+help = "Enable/Disable the captcha challenge on the login page"
+bind = "captcha_enabled:__INSTALL_DIR__/config/config.yml"
+
+[main.users_accounts.enable_user_notifications]
+ask = "Enable user notifications"
+type = "boolean"
+yes = "true"
+no = "false"
+help = "Note: On large instances, it is recommended to set this option to 'false' in order to reduce the amount of data written to the database, and hence improve the overall performance of the instance."
+bind = "enable_user_notifications:__INSTALL_DIR__/config/config.yml"
+
+
+[main.miscellaneous]
+name = "Miscellaneous configuration"
+
+[main.miscellaneous.banner]
+ask.en = "Text of the banner"
+bind = "banner:__FINALPATH__/config.yaml"
+help = "Custom banner displayed at the top of every page. This can used for instance announcements. Accepted values: any string. HTML is accepted. Empty by default."
+type = "string"
