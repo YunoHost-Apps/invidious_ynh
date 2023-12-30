@@ -46,6 +46,6 @@ name = "Miscellaneous configuration"
 
 [main.miscellaneous.banner]
 ask.en = "Text of the banner"
-bind = "banner:__FINALPATH__/config.yaml"
+bind = "banner:__INSTALL_DIR__/config/config.yml"
 help = "Custom banner displayed at the top of every page. This can used for instance announcements. Accepted values: any string. HTML is accepted. Empty by default."
 type = "string"
