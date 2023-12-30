@@ -50,6 +50,9 @@ chown -R "$app:www-data" "$install_dir"
 git config --system --add safe.directory "$install_dir"
 
 # Download, check integrity, uncompress and patch the source from GitHub
+# note: we can't use resources.sources instead of git because Invidious is
+# expecting to be in a git environment for the building step...
+# see: https://github.com/YunoHost-Apps/invidious_ynh/pull/127
 git clone https://github.com/iv-org/invidious "$install_dir" --quiet
 
 pushd "$install_dir"
