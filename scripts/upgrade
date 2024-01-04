@@ -22,7 +22,7 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
+ynh_systemd_action --service_name="$app" --action=stop --log_path=systemd
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
@@ -31,22 +31,32 @@ ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
 if [ -z "${registration_enabled:-}" ]; then
 	registration_enabled="true"
-	ynh_app_setting_set --app=$app --key=registration_enabled --value=$registration_enabled
+	ynh_app_setting_set --app="$app" --key=registration_enabled --value=$registration_enabled
 fi
 
 if [ -z "${login_enabled:-}" ]; then
 	login_enabled="true"
-	ynh_app_setting_set --app=$app --key=login_enabled --value=$login_enabled
+	ynh_app_setting_set --app="$app" --key=login_enabled --value=$login_enabled
 fi
 
 if [ -z "${captcha_enabled:-}" ]; then
 	captcha_enabled="true"
-	ynh_app_setting_set --app=$app --key=captcha_enabled --value=$captcha_enabled
+	ynh_app_setting_set --app="$app" --key=captcha_enabled --value=$captcha_enabled
 fi
 
 if [ -z "${key:-}" ]; then
 	key=$(ynh_string_random --length=24)
-	ynh_app_setting_set --app=$app --key=key --value=$key
+	ynh_app_setting_set --app="$app" --key=key --value="$key"
+fi
+
+if [ -z "${enable_user_notifications:-}" ]; then
+	enable_user_notifications="true"
+	ynh_app_setting_set --app="$app" --key=enable_user_notifications --value="$enable_user_notifications"
+fi
+
+if [ -z "${banner:-}" ]; then
+	banner=""
+	ynh_app_setting_set --app="$app" --key=banner --value="$banner"
 fi
 
 #=================================================
@@ -64,21 +74,21 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-	pushd $install_dir
-		chown -R $app:www-data "$install_dir"
-		git config --system --add safe.directory $install_dir
+	pushd "$install_dir"
+		chown -R "$app:www-data" "$install_dir"
+		git config --system --add safe.directory "$install_dir"
 		
-		ynh_exec_as $app git fetch
+		ynh_exec_as "$app" git fetch
     	#git checkout master
-    	ynh_exec_as $app git reset --hard --quiet $version_commit
-		ynh_exec_as $app git pull
+    	ynh_exec_as "$app" git reset --hard --quiet "$version_commit"
+		ynh_exec_as "$app" git pull
 		ynh_exec_warn_less shards install --production
-		ynh_exec_warn_less crystal build $install_dir/src/invidious.cr --release
+		ynh_exec_warn_less crystal build "$install_dir/src/invidious.cr" --release
 	popd
 fi
 
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
@@ -90,30 +100,30 @@ ynh_add_nginx_config
 
 ynh_add_systemd_config
 
-ynh_add_config --template="../conf/cron_invidious" --destination="/etc/cron.d/$app"
+ynh_add_config --template="cron_invidious" --destination="/etc/cron.d/$app"
 chown root: "/etc/cron.d/$app"
 chmod 644 "/etc/cron.d/$app"
 
 ynh_use_logrotate --non-append
 
-yunohost service add $app --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
+yunohost service add "$app" --description="Invidious is an alternative front-end to YouTube" --log="/var/log/$app/$app.log"
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=1
 
-ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
+ynh_add_config --template="config.yml" --destination="$install_dir/config/config.yml"
 
-chmod 600 $install_dir/config/config.yml
-chown $app:$app "$install_dir/config/config.yml"
+chmod 600 "$install_dir/config/config.yml"
+chown "$app:$app" "$install_dir/config/config.yml"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action=restart --log_path=systemd
+ynh_systemd_action --service_name="$app" --action=restart --log_path=systemd
 
 #=================================================
 # END OF SCRIPT
