@@ -16,7 +16,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
+ynh_systemd_action --service_name="$app" --action="stop" --log_path="systemd"
 
 #=================================================
 # MODIFY URL IN NGINX CONF
@@ -30,10 +30,10 @@ ynh_change_url_nginx_config
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=1
 
-ynh_add_config --template="../conf/config.yml" --destination="$install_dir/config/config.yml"
+ynh_add_config --template="config.yml" --destination="$install_dir/config/config.yml"
 
-chmod 600 $install_dir/config/config.yml
-chown $app:$app "$install_dir/config/config.yml"
+chmod 600 "$install_dir/config/config.yml"
+chown "$app:$app" "$install_dir/config/config.yml"
 
 #=================================================
 # GENERIC FINALISATION
@@ -42,7 +42,7 @@ chown $app:$app "$install_dir/config/config.yml"
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=3
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
+ynh_systemd_action --service_name="$app" --action="start" --log_path="systemd"
 
 #=================================================
 # END OF SCRIPT
