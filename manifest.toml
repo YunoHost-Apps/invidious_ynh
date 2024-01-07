@@ -5,7 +5,7 @@ name = "Invidious"
 description.en = "Alternative front-end to YouTube"
 description.fr = "Front-end alternatif à YouTube"
 
-version = "23.12.18~ynh1"
+version = "23.12.18~ynh2"
 
 maintainers = ["eric_G"]
 
@@ -30,43 +30,43 @@ ram.build = "2G"
 ram.runtime = "50M"
 
 [install]
-    [install.domain]
-    type = "domain"
+[install.domain]
+type = "domain"
 
-    [install.admin]
-    type = "user"
+[install.admin]
+type = "user"
 
-    [install.init_main_permission]
-    type = "group"
-    default = "visitors"
+[install.init_main_permission]
+type = "group"
+default = "visitors"
 
-    [install.language]
-    ask.en = "Choose the application language"
-    ask.fr = "Choisissez la langue de l'application"
-    type = "select"
-    choices = ["de", "en-US", "es", "fr", "it", "nl", "pt-PT"]
-    default = "fr"
+[install.language]
+ask.en = "Choose the application language"
+ask.fr = "Choisissez la langue de l'application"
+type = "select"
+choices = ["de", "en-US", "es", "fr", "it", "nl", "pt-PT"]
+default = "fr"
 
 [resources]
-    [resources.system_user]
+[resources.system_user]
 
-    [resources.install_dir]
+[resources.install_dir]
 
-    [resources.ports]
+[resources.ports]
 
-    [resources.permissions]
-    main.url = "/"
-    api.url = "/api"
-    api.show_tile = false
-    api.allowed = ["visitors"]
-    api.protected = true
-    vi.url = "/vi"
-    vi.show_tile = false
-    vi.allowed = ["visitors"]
-    vi.protected = true
+[resources.permissions]
+main.url = "/"
+api.url = "/api"
+api.show_tile = false
+api.allowed = ["visitors"]
+api.protected = true
+vi.url = "/vi"
+vi.show_tile = false
+vi.allowed = ["visitors"]
+vi.protected = true
 
-    [resources.apt]
-    packages = "postgresql, libssl-dev, libxml2-dev, libyaml-dev, libgmp-dev, libreadline-dev, librsvg2-bin, imagemagick, libsqlite3-dev, zlib1g-dev, libevent-dev, libpcre3-dev"
+[resources.apt]
+packages = "postgresql, libssl-dev, libxml2-dev, libyaml-dev, libgmp-dev, libreadline-dev, librsvg2-bin, imagemagick, libsqlite3-dev, zlib1g-dev, libevent-dev, libpcre3-dev"
 
-    [resources.database]
-    type = "postgresql"
+[resources.database]
+type = "postgresql"
