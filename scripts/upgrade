@@ -77,6 +77,7 @@ then
 	pushd "$install_dir"
 		chown -R "$app:www-data" "$install_dir"
 		git config --system --add safe.directory "$install_dir"
+		ynh_exec_as "$app" git config pull.rebase false
 		
 		ynh_exec_as "$app" git fetch
     	#git checkout master
