@@ -26,7 +26,7 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 24.01.18~ynh2
+**Version incluse :** 24.01.29~ynh1
 
 **Démo :** https://invidious.site/
 
