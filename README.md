@@ -9,7 +9,6 @@ It shall NOT be edited by hand.
 
 [![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
-*[Read this README in other languages.](./ALL_README.md)*
 
 > *This package allows you to install Invidious quickly and simply on a YunoHost server.*  
 > *If you don't have YunoHost, please consult [the guide](https://yunohost.org/install) to learn how to install it.*
