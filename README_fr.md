@@ -26,7 +26,7 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 24.03.29~ynh1
+**Version incluse :** 24.04.27~ynh1
 
 **Démo :** <https://invidious.site/>
 
@@ -36,7 +36,7 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 
 ## :red_circle: Anti-fonctionnalités
 
-- **Services réseau non libres**: Promeut ou utilise des services réseau non libres.
+- **Services réseau non libres **: Promeut ou utilise des services réseau non libres.
 
 ## Documentations et ressources
 
