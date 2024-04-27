@@ -7,7 +7,7 @@ description.fr = "Front-end alternatif à YouTube"
 
 version = "24.04.27~ynh1"
 
-maintainers = [""]
+maintainers = []
 
 [upstream]
 license = "GPL-3.0-only"
