@@ -51,18 +51,6 @@ chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
 #=================================================
-# SPECIFIC SETUP
-#=================================================
-# INSTALL INVIDIOUS
-#=================================================
-ynh_script_progression --message="Building Invidious.. (this will take some time and resources!)" --weight=60
-
-pushd "$install_dir"
-	make
-	./invidious --migrate
-popd
-
-#=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Modifying a config file..." --weight=1
@@ -71,6 +59,18 @@ ynh_add_config --template="config.yml" --destination="$install_dir/config/config
 
 chmod 600 "$install_dir/config/config.yml"
 chown "$app:$app" "$install_dir/config/config.yml"
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+# INSTALL INVIDIOUS
+#=================================================
+ynh_script_progression --message="Building Invidious... (this will take some time and resources!)" --weight=60
+
+pushd "$install_dir"
+	make
+	./invidious --migrate
+popd
 
 #=================================================
 # SYSTEM CONFIGURATION
