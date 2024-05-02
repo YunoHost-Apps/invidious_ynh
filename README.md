@@ -27,7 +27,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**Shipped version:** 24.04.27~ynh1
+**Shipped version:** 2.20240427~ynh1
 
 **Demo:** <https://invidious.site/>
 
