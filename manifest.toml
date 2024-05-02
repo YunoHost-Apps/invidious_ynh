@@ -5,7 +5,7 @@ name = "Invidious"
 description.en = "Alternative front-end to YouTube"
 description.fr = "Front-end alternatif à YouTube"
 
-version = "24.04.28~ynh1"
+version = "24.04.27~ynh1"
 
 maintainers = []
 
@@ -48,6 +48,11 @@ ram.runtime = "50M"
     default = "fr"
 
 [resources]
+
+    [resources.sources.main]
+    url = "https://github.com/iv-org/invidious/archive/refs/tags/v2.20240427.tar.gz"
+    sha256 = "0f290de213eda898f95fd0108652738f88bb6d09289e0cea86c178050271660d"
+
     [resources.system_user]
 
     [resources.install_dir]

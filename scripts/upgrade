@@ -10,12 +10,6 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# CHECK VERSION
-#=================================================
-
-upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -69,26 +63,13 @@ ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- -
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Upgrading source files..." --weight=1
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Upgrading source files..." --weight=5
+# Download, check integrity, uncompress and patch the source from manifest.toml
+ynh_setup_source --dest_dir="$install_dir"
+ynh_exec_warn_less shards install --production
+ynh_exec_warn_less crystal build "$install_dir/src/invidious.cr" --release
 
-	pushd "$install_dir"
-		chown -R "$app:www-data" "$install_dir"
-		git config --system --add safe.directory "$install_dir"
-		ynh_exec_as "$app" git config pull.rebase false
-		
-		ynh_exec_as "$app" git fetch
-    	#git checkout master
-    	ynh_exec_as "$app" git reset --hard --quiet "$version_commit"
-		ynh_exec_as "$app" git pull
-		ynh_exec_warn_less shards install --production
-		ynh_exec_warn_less crystal build "$install_dir/src/invidious.cr" --release
-	popd
-fi
-
-chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
 #=================================================
