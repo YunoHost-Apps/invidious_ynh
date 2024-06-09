@@ -35,7 +35,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 
 ![Captura de pantalla de Invidious](./doc/screenshots/screenshot.png)
 
-## :red_circle: Caraterísticas cuestionables
+## :red_circle: Debes considerar
 
 - **Non-free Network Services**: Promotes or depends entirely on a non-free network service.
 
