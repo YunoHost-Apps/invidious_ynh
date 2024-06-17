@@ -3,7 +3,7 @@
 请勿手动编辑。
 -->
 
-# YunoHost 的 Invidious
+# YunoHost 上的 Invidious
 
 [![集成程度](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![工作状态](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
 
@@ -27,7 +27,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**分发版本：** 24.04.28~ynh1
+**分发版本：** 24.06.09~ynh1
 
 **演示：** <https://invidious.site/>
 

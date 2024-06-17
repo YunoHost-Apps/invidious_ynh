@@ -22,11 +22,6 @@ then
 	yunohost service remove "$app"
 fi
 
-#=================================================
-# REMOVE SYSTEM CONFIGURATIONS
-#=================================================
-ynh_script_progression --message="Removing system configurations related to $app..." --weight=10
-
 dpkg --remove crystal
 
 # Remove the dedicated systemd config
