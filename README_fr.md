@@ -5,7 +5,7 @@ Il NE doit PAS être modifié à la main.
 
 # Invidious pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
+[![Niveau d’intégration](https://dash.yunohost.org/integration/invidious.svg)](https://ci-apps.yunohost.org/ci/apps/invidious/) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
 
 [![Installer Invidious avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
@@ -26,7 +26,7 @@ En plus de constituer un avantage sur le plan de la confidentialité (les donné
 - Possibilité d'afficher les commentaires Reddit plutôt que les commentaires YouTube,
 - Possibilité de s'abonner aux chaines sans créer de compte Google
 
-**Version incluse :** 24.06.09~ynh1
+**Version incluse :** 24.08.23~ynh1
 
 **Démo :** <https://invidious.site/>
 
