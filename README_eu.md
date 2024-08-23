@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Invidious YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/invidious.svg)](https://ci-apps.yunohost.org/ci/apps/invidious/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
 
 [![Instalatu Invidious YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
@@ -27,7 +27,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**Paketatutako bertsioa:** 24.06.09~ynh1
+**Paketatutako bertsioa:** 24.08.23~ynh1
 
 **Demoa:** <https://invidious.site/>
 

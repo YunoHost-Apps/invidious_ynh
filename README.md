@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # Invidious for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://dash.yunohost.org/appci/app/invidious) ![Working status](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
+[![Integration level](https://dash.yunohost.org/integration/invidious.svg)](https://ci-apps.yunohost.org/ci/apps/invidious/) ![Working status](https://ci-apps.yunohost.org/ci/badges/invidious.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/invidious.maintain.svg)
 
 [![Install Invidious with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=invidious)
 
@@ -27,7 +27,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**Shipped version:** 24.06.09~ynh1
+**Shipped version:** 24.08.23~ynh1
 
 **Demo:** <https://invidious.site/>
 
