@@ -5,7 +5,7 @@ name = "Invidious"
 description.en = "Alternative front-end to YouTube"
 description.fr = "Front-end alternatif à YouTube"
 
-version = "24.08.23~ynh1"
+version = "24.09.20~ynh1"
 
 maintainers = []
 
