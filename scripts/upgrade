@@ -15,41 +15,12 @@ ynh_systemctl --service="$app" --action=stop --log_path=systemd
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
 
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=registration_enabled --value="true"
-if [ -z "${registration_enabled:-}" ]; then
-	registration_enabled="true"
-	ynh_app_setting_set --key=registration_enabled --value=$registration_enabled
-fi
-
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=login_enabled --value="true"
-if [ -z "${login_enabled:-}" ]; then
-	login_enabled="true"
-	ynh_app_setting_set --key=login_enabled --value=$login_enabled
-fi
-
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=captcha_enabled --value="true"
-if [ -z "${captcha_enabled:-}" ]; then
-	captcha_enabled="true"
-	ynh_app_setting_set --key=captcha_enabled --value=$captcha_enabled
-fi
-
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=key --value=$(ynh_string_random --length=24)
-if [ -z "${key:-}" ]; then
-	key=$(ynh_string_random --length=24)
-	ynh_app_setting_set --key=key --value="$key"
-fi
-
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=enable_user_notifications --value="true"
-if [ -z "${enable_user_notifications:-}" ]; then
-	enable_user_notifications="true"
-	ynh_app_setting_set --key=enable_user_notifications --value="$enable_user_notifications"
-fi
-
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=banner --value=""
-if [ -z "${banner:-}" ]; then
-	banner=""
-	ynh_app_setting_set --key=banner --value="$banner"
-fi
+ynh_app_setting_set_default --key=registration_enabled --value="true"
+ynh_app_setting_set_default --key=login_enabled --value="true"
+ynh_app_setting_set_default --key=captcha_enabled --value="true"
+ynh_app_setting_set_default --key=key --value=$(ynh_string_random --length=24)
+ynh_app_setting_set_default --key=enable_user_notifications --value="true"
+ynh_app_setting_set_default --key=banner --value=""
 
 #=================================================
 # UPGRADE DEPENDENCIES
@@ -64,7 +35,7 @@ ynh_hide_warnings curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --
 ynh_script_progression "Upgrading source files..."
 
 pushd "$install_dir"
-	#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
+	chown -R "$app:www-data" "$install_dir"
 	git config --system --add safe.directory "$install_dir"
 	ynh_exec_as_app git config pull.rebase false
 
@@ -76,8 +47,9 @@ pushd "$install_dir"
 	ynh_hide_warnings crystal build "$install_dir/src/invidious.cr" --release
 popd
 
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
+
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
@@ -89,8 +61,6 @@ ynh_config_add_nginx
 ynh_config_add_systemd
 
 ynh_config_add --template="cron_invidious" --destination="/etc/cron.d/$app"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown root: "/etc/cron.d/$app"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 644 "/etc/cron.d/$app"
 
 ynh_config_add_logrotate
 
@@ -103,8 +73,7 @@ ynh_script_progression "Updating configuration..."
 
 ynh_config_add --template="config.yml" --destination="$install_dir/config/config.yml"
 
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 600 "$install_dir/config/config.yml"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:$app" "$install_dir/config/config.yml"
+chmod 600 "$install_dir/config/config.yml"
 
 #=================================================
 # START SYSTEMD SERVICE
