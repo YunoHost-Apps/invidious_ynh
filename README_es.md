@@ -27,7 +27,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 - Ability to subscribe to channels without creating a Google account 
 
 
-**Versión actual:** 24.08.23~ynh1
+**Versión actual:** 24.09.20~ynh1
 
 **Demo:** <https://invidious.site/>
 
@@ -49,7 +49,7 @@ In addition to constituting an advantage in terms of confidentiality (the data d
 
 ## Información para desarrolladores
 
-Por favor enviar sus correcciones a la [`branch testing`](https://github.com/YunoHost-Apps/invidious_ynh/tree/testing
+Por favor enviar sus correcciones a la [rama `testing`](https://github.com/YunoHost-Apps/invidious_ynh/tree/testing).
 
 Para probar la rama `testing`, sigue asÍ:
 
