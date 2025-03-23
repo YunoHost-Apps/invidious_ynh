@@ -37,27 +37,18 @@ ynh_app_setting_set --app="$app" --key=banner --value="$banner"
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=15
 
-ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
+ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --version=1.15
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-mkdir -p "$install_dir"
-chown -R "$app:www-data" "$install_dir"
-
-git config --system --add safe.directory "$install_dir"
-
 # Download, check integrity, uncompress and patch the source from GitHub
-# note: we can't use resources.sources instead of git because Invidious is
-# expecting to be in a git environment for the building step...
-# see: https://github.com/YunoHost-Apps/invidious_ynh/pull/127
-git clone https://github.com/iv-org/invidious "$install_dir" --quiet
+ynh_setup_source --dest_dir="$install_dir"
 
 pushd "$install_dir"
-	git reset --hard --quiet "$version_commit"
-	make
+    make
 popd
 
 chmod -R o-rwx "$install_dir"

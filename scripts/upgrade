@@ -58,26 +58,22 @@ fi
 #=================================================
 ynh_script_progression --message="Upgrading dependencies..." --weight=8
 
-ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --channel=stable
+ynh_exec_warn_less curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --version=1.15
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Upgrading source files..." --weight=5
 
-pushd "$install_dir"
-	chown -R "$app:www-data" "$install_dir"
-	git config --system --add safe.directory "$install_dir"
-	ynh_exec_as "$app" git config pull.rebase false
-	
-	ynh_exec_as "$app" git fetch
-   	#git checkout master
-   	ynh_exec_as "$app" git reset --hard --quiet "$version_commit"
-	ynh_exec_as "$app" git pull
-	ynh_exec_warn_less shards install --production
-	ynh_exec_warn_less crystal build "$install_dir/src/invidious.cr" --release
-popd
+# First we remove the previous install
+ynh_safe_rm $install_dir
 
+# Download, check integrity, uncompress and patch the source from GitHub
+ynh_setup_source --dest_dir="$install_dir"
+
+pushd "$install_dir"
+    make
+popd
 
 chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
