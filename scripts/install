@@ -48,6 +48,9 @@ ynh_script_progression --message="Setting up source files..." --weight=4
 ynh_setup_source --dest_dir="$install_dir"
 
 pushd "$install_dir"
+    git init
+    git add .
+    git commit -m "First commit"
     make
 popd
 
