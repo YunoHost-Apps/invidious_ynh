@@ -4,4 +4,4 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-version_commit=e319c35f097e08590e705378c7e5b479720deabc
+version_commit=4b37d47ebbc4d3a0a55c8febaca2b28a68e1d9b5
