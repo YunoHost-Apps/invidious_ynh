@@ -5,7 +5,7 @@ name = "Invidious"
 description.en = "Alternative front-end to YouTube"
 description.fr = "Front-end alternatif à YouTube"
 
-version = "24.11.08~ynh1"
+version = "2025.05.24~ynh1"
 
 maintainers = []
 
@@ -17,7 +17,8 @@ admindoc = "https://docs.invidious.io/"
 code = "https://github.com/iv-org/invidious"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 12.0.9"
+helpers_version = "2.1"
 architectures = ["amd64"]
 multi_instance = false
 
